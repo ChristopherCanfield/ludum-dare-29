@@ -4,10 +4,8 @@
  * October 2013; Updated November 2013
  */
 
-
-
-
-function Textures() {}
+function Textures() {
+}
 
 Textures.GROUND_GRASS_MUD = "textures/ground/grass_ground2.jpg";
 Textures.GROUND_MUD = "textures/ground/mud_grass.jpg";
@@ -96,24 +94,31 @@ Textures.MASK_1 = "textures/mask/mask1.jpg";
 Textures.MASK_2 = "textures/mask/mask2.jpg";
 Textures.MASK_3 = "textures/mask/mask3.png";
 
-
+/**
+ * Initializes the texture manager with the gl context. 
+ * @param {Object} glContext
+ */
 function TextureManager(glContext) {
-    this.textures = {};
-    this.gl = glContext;
+	this.textures =	{};
+	this.gl = glContext;
 }
 
-TextureManager.prototype.getTexture = function(texturePath) {    
-    if (texturePath in this.textures)
-    {
-        return this.textures[texturePath];
-    }
-    else
-    {
-        var t = THREE.ImageUtils.loadTexture(texturePath);
-        t.wrapS = THREE.RepeatWrapping;
-        t.wrapT = THREE.RepeatWrapping;
-        t.anisotropy = this.gl.getMaxAnisotropy();
-        this.textures[texturePath] = t;
-        return t;        
-    }
+/**
+ * Loads the specified texture, or passes a reference to it if the texture has already been loaded.   
+ * @param {String} texturePath
+ */
+TextureManager.prototype.getTexture = function(texturePath) {
+	if ( texturePath in this.textures)
+	{
+		return this.textures[texturePath];
+	}
+	else
+	{
+		var t = THREE.ImageUtils.loadTexture(texturePath);
+		t.wrapS = THREE.RepeatWrapping;
+		t.wrapT = THREE.RepeatWrapping;
+		t.anisotropy = this.gl.getMaxAnisotropy();
+		this.textures[texturePath] = t;
+		return t;
+	}
 };

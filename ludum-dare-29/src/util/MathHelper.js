@@ -8,16 +8,25 @@
 
 function MathHelper() {}
 
+/**
+ * Returns the angle between two points, in radians. 
+ */
 MathHelper.angleInRadians = function(point1x, point1z, point2x, point2z) {
     var deltaZ = point1z - point2z;
     var deltaX = point1x - point2x;
     return Math.atan2(deltaZ, deltaX);
 };
 
+/**
+ * Converts degrees to radians. 
+ */
 MathHelper.degreesToRadians = function(degrees) {
     return (degrees * Math.PI / 180.0);
 };
 
+/**
+ * Converts radians to degrees. 
+ */
 MathHelper.radiansToDegrees = function(radians) {
     return (radians * 180.0 / Math.PI);
 };
@@ -26,8 +35,8 @@ MathHelper.radiansToDegrees = function(radians) {
 /**
  * Returns a random integer between min and max, inclusive of each.
  * From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FMath%2Frandom
- * @param {Object} min
- * @param {Object} max
+ * @param {int} min
+ * @param {int} max
  */
 MathHelper.randomInt = function(min, max) {
     if (typeof min === "undefined")
@@ -44,8 +53,8 @@ MathHelper.randomInt = function(min, max) {
 
 /**
  * From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random 
- * @param {Object} min
- * @param {Object} max
+ * @param {Number} min
+ * @param {Number} max
  */
 MathHelper.randomNumber = function(min, max) {
   return Math.random() * (max - min) + min;

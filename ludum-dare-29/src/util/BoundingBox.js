@@ -6,6 +6,7 @@
 
 
 /**
+ * Constructs a new Bounding Box.
  * @param {float} xLeft
  * @param {float} width
  * @param {float} yBottom
@@ -40,7 +41,7 @@ BoundingBox.prototype.equals = function(otherBox) {
 };
 
 /**
- * 
+ * Returns true if the bounding boxes intersect.
  * @param {BoundingBox} otherBox
  * @return boolean specifying whether the two BoundingBoxes intersect.
  */
@@ -57,7 +58,9 @@ BoundingBox.prototype.intersects = function(otherBox) {
     return (intersectsX && intersectsY && intersectsZ);
 };
 
-
+/**
+ * Returns true if the bounding boxes overlap on the x axis. 
+ */
 BoundingBox.overlapsX = function(box1, box2) {
     return ((box1.xLeft <= (box2.xLeft + box2.width) &&
             box1.xLeft >= box2.xLeft) ||
@@ -65,6 +68,9 @@ BoundingBox.overlapsX = function(box1, box2) {
             box1.xLeft <= box2.xLeft)); 
 };
 
+/**
+ * Returns true if the bounding boxes overlap on the y axis. 
+ */
 BoundingBox.overlapsY = function(box1, box2) {
     return ((box1.yBottom <= (box2.yBottom + box2.height) &&
             box1.yBottom >= box2.yBottom) ||
@@ -72,6 +78,9 @@ BoundingBox.overlapsY = function(box1, box2) {
             box1.yBottom <= box2.yBottom)); 
 };
 
+/**
+ * Returns true if the bounding boxes overlap on the z axis. 
+ */
 BoundingBox.overlapsZ = function(box1, box2) {
     return ((box1.zBack <= (box2.zBack + box2.depth) &&
             box1.zBack >= box2.zBack) ||
