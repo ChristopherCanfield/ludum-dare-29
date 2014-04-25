@@ -28,14 +28,37 @@
 				display: block;
 			}
 		</style>
+		
+		<!-- Libraries -->
+		<script type="text/javascript" src="libs/threejs/three.js"></script>
+		<script type="text/javascript" src="libs/physijs/physi.js"></script>
+		
+		<!-- Utilities -->
+		<script type="text/javascript" src="src/util/MathHelper.js"></script>
+		<script type="text/javascript" src="src/util/BoundingBox.js"></script>
+		
+		<!-- Graphics -->
+		<script type="text/javascript" src="src/graphics/TextureManager.js"></script>
+		<script type="text/javascript" src="src/graphics/Camera.js"></script>
+		
+		<!-- Controllers -->
+		<script type="text/javascript" src="src/controller/CameraController.js"></script>
+		
+		<!-- The starting point of the program. -->
+		<script type="text/javascript" src="src/main.js"></script>
+		
+		<script type="text/javascript">
+			'use strict';
+
+			Physijs.scripts.worker = "libs/physijs/physijs_worker.js";
+			Physijs.scripts.ammo = "libs/physijs/ammo.js";
+
+			window.onload = initialize;
+		</script>
 	</head>
 
 	<body>
-
-		<span >
-			<canvas id="gl-canvas" width="100%" height="100%" class="textboxLabelDefault">
-				Your browser doesn't support the HTML5 canvas element
-			</canvas>
+			<div id="viewport"></div>
 			
 			<!-- <span class="blockDisplay ">
 				<span style="font-weight: bold">Controls:</span><br>
@@ -44,25 +67,7 @@
 				Rotate: Left/Right or A/D<br>
 				Strafe: ctrl-Left/ctrl-Right or ctrl-A/ctrl-D<br>
 			</span> -->
-		</span>
-		
-		<!-- three.js -->
-		<script type="text/javascript" src="libs/threejs/three.js"></script>
-		
-		<!-- Utilities -->
-		<script type="text/javascript" src="util/MathHelper.js"></script>
-		<script type="text/javascript" src="util/BoundingBox.js"></script>
-		
-		<!-- Graphics -->
-		<script type="text/javascript" src="TextureManager.js"></script>
-		<script type="text/javascript" src="Camera.js"></script>
-		
-		<!-- Controllers -->
-		<script type="text/javascript" src="CameraController.js"></script>
-		
-		<!-- The starting point of the program. -->
-		<script type="text/javascript" src="main.js"></script>
-		
+
 		<div style="clear:both">
 			<footer>
 			    Christopher D. Canfield<br>
