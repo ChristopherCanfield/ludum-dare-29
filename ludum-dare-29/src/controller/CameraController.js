@@ -11,11 +11,9 @@
  * @param {int} canvasWidth The width of the canvas.
  * @param {int} canvasHeight The height of the canvas.
  * @param {Camera} camera Reference to the Camera object.
- * @param {Door[]} doors
  */
-function CameraController(canvasWidth, canvasHeight, camera, doors) {    
+function CameraController(canvasWidth, canvasHeight, camera) {    
     this.camera = camera;
-    this.doors = doors;
     
     this.lastMouseX = canvasWidth / 2.0;
     this.lastMosueY = canvasHeight / 2.0;
@@ -92,14 +90,6 @@ CameraController.prototype.keyDown = function(e) {
         box.width += 110;
         box.zBack -= 65;
         box.depth += 130;
-        
-        for (var i = 0; i < this.doors.length; ++i)
-        {
-            if (this.doors[i].intersects(box) && !this.doors[i].isOpen())
-            {
-                this.doors[i].open();
-            }
-        }
     }
 };
 
