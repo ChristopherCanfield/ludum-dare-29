@@ -3,6 +3,9 @@
  * 2014-04-25
  */
 
+Physijs.scripts.worker = "libs/physijs/physijs_worker.js";
+Physijs.scripts.ammo = "ammo.js";
+
  var initialize, render, renderer, scene, camera, box;
 
 initialize = function() {
@@ -31,19 +34,26 @@ initialize = function() {
     	    0.8, // friction
     	    0.4 // restitution
     	),
-    	1	// weight
+    	10	// weight
     );
     box.position.set(0, 20, 0);
     box.__dirtyPosition = true;
+    box.rotation.x += 0.5;
+    box.__dirtyRotation = true;
     scene.add(box);
-
+    
 	var light = new THREE.PointLight(0xffffff, 1, 100);
 	light.position.set(30, 30, 50);
 	scene.add(light);
 	
 	var ground = new Physijs.BoxMesh(
 		new THREE.BoxGeometry(50, 1, 50),
-		new THREE.MeshPhongMaterial({ color: 0x0094ff})
+		Physijs.createMaterial(
+			new THREE.MeshPhongMaterial({ color: 0x0094ff}),
+			0.9, // friction
+			0.3	// restitution
+		),
+		0 // weight
 	);
 	ground.position.set(0, 0, 0);
 	ground.__dirtyPosition = true;
@@ -59,8 +69,8 @@ render = function() {
     // render the scene.
     renderer.render( scene, camera);
      
-     box.rotation.x += .05;
-     box.__dirtyRotation = true;
+     // box.rotation.x += .05;
+     // box.__dirtyRotation = true;
      
     requestAnimationFrame( render );
 };
