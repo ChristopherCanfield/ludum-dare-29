@@ -6,12 +6,18 @@
 Physijs.scripts.worker = "libs/physijs/physijs_worker.js";
 Physijs.scripts.ammo = "ammo.js";
 
- var initialize, render, renderer, scene, camera, box;
+ var initialize, 
+ 	render, 
+ 	graphics, 
+ 	scene, 
+ 	camera, 
+ 	box,
+ 	world;
 
 initialize = function() {
-    renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    document.getElementById( 'viewport' ).appendChild( renderer.domElement );
+    graphics = new THREE.WebGLRenderer({ antialias: true });
+    graphics.setSize( window.innerWidth, window.innerHeight );
+    document.getElementById("viewport").appendChild(graphics.domElement);
 
     scene = new Physijs.Scene({ fixedTimeStep: 1/60});
     scene.setGravity(new THREE.Vector3(0, -9.8, 0));
@@ -59,6 +65,8 @@ initialize = function() {
 	ground.__dirtyPosition = true;
 	scene.add(ground);
 
+	world = new World(scene);
+
     requestAnimationFrame( render );
 };
 
@@ -67,10 +75,10 @@ render = function() {
     scene.simulate();
     
     // render the scene.
-    renderer.render( scene, camera);
+    graphics.render(scene, camera);
      
      // box.rotation.x += .05;
      // box.__dirtyRotation = true;
      
-    requestAnimationFrame( render );
+    requestAnimationFrame(render);
 };
