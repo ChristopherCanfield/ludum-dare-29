@@ -47,7 +47,9 @@ initialize = function() {
     box.setPosition(0, 20, 0);
     box.setRotation(0.5, 0, 0);
     world.add(box);
-    box.addController(new TestEnemy());
+    box.addController(new TestEnemyController());
+    
+    
     
 	var light = new THREE.PointLight(0xffffff, 1, 100);
 	light.position.set(30, 30, 50);
