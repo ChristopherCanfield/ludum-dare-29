@@ -10,7 +10,7 @@ function Entities() {}
 
 /**
  * Simple test entity that is controlled by a movement controller.
- * @param {Object} world
+ * @param {World} world
  * @param {THREE.Vector3} position the starting position.
  */
 Entities.createTestEnemy = function(world, position) {
