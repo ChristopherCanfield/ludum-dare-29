@@ -26,9 +26,9 @@ Entity.prototype.isDisposed = function() {
 };
 
 Entity.prototype.move = function(x, y, z) {
-	this.mesh.translate.x += x;
-	this.mesh.translate.y += y;
-	this.mesh.translate.z += z;
+	this.mesh.position.x += x;
+	this.mesh.position.y += y;
+	this.mesh.position.z += z;
 
 	this.mesh.__dirtyPosition = true;
 };

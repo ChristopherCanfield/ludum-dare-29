@@ -9,7 +9,7 @@ function World(scene) {
 };
 
 World.prototype.update = function() {
-	for (var i = 0; i < length; ++i)
+	for (var i = 0; i < this.entities.length; ++i)
 	{
 		if (this.entities[i].isDisposed())
 		{

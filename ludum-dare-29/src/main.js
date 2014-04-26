@@ -70,14 +70,14 @@ initialize = function() {
 };
 
 render = function() {
+	// update the controllers.
+    world.update();
+	
 	// simulate physics.
     scene.simulate();
     
     // render the scene.
     graphics.render(scene, camera);
-     
-    // update the controllers.
-    world.update();
      
     requestAnimationFrame(render);
 };
