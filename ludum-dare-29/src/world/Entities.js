@@ -11,8 +11,9 @@ function Entities() {}
 /**
  * Simple test entity that is controlled by a movement controller.
  * @param {Object} world
+ * @param {THREE.Vector3} position the starting position.
  */
-Entities.createTestEnemy = function(world) {
+Entities.createTestEnemy = function(world, position) {
 	var entity = new Entity(new Physijs.BoxMesh(
         new THREE.BoxGeometry(5, 5, 5),
         Physijs.createMaterial(
@@ -23,6 +24,7 @@ Entities.createTestEnemy = function(world) {
     	10	// weight
     ));
     entity.addController(new TestEnemyController());
+    entity.setPosition(position.x, position.y, position.z);
     
     world.add(entity);
     
@@ -32,8 +34,9 @@ Entities.createTestEnemy = function(world) {
 /**
  * Simple controllable test entity.
  * @param {Object} world
+ * @param {THREE.Vector3} position the starting position.
  */
-Entities.createControllableTestEntity = function(world) {
+Entities.createControllableTestEntity = function(world, position) {
 	var entity = new Entity(new Physijs.CapsuleMesh(
         new THREE.BoxGeometry(5, 5, 5),
         Physijs.createMaterial(
@@ -44,6 +47,7 @@ Entities.createControllableTestEntity = function(world) {
     	10	// weight
     ));
     entity.addController(new CharacterKeyboardController());
+    entity.setPosition(position.x, position.y, position.z);
     
     world.add(entity);
     

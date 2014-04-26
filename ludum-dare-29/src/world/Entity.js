@@ -75,3 +75,10 @@ Entity.prototype.applyForce = function(force, offset) {
 Entity.prototype.applyCentralForce = function(force) {
 	this.mesh.applyCentralForce(force);
 };
+
+Entity.prototype.accelerate = function(force) {
+	var velocity = mesh.getLinearVelocity();
+	mesh.setLinearVelocity(new THREE.Vector3(velocity.x + force.x, 
+		velocity.y + force.y,
+		velocity.z + force.z));
+};

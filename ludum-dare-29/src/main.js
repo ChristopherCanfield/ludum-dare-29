@@ -20,7 +20,7 @@ initialize = function() {
     document.getElementById("viewport").appendChild(graphics.domElement);
 
     scene = new Physijs.Scene({ fixedTimeStep: 1/60});
-    scene.setGravity(new THREE.Vector3(0, -9.8, 0));
+    scene.setGravity(new THREE.Vector3(0, -3, 0));
 
     camera = new THREE.PerspectiveCamera(
         35,
@@ -49,8 +49,9 @@ initialize = function() {
     // world.add(box);
     // box.addController(new TestEnemyController());
     
-    box = Entities.createTestEnemy(world);
+    box = Entities.createTestEnemy(world, new THREE.Vector3(0, 20, 0));
     
+    Entities.createControllableTestEntity(world, new THREE.Vector3(-20, 5, 0));
     
 	var light = new THREE.PointLight(0xffffff, 1, 100);
 	light.position.set(30, 30, 50);

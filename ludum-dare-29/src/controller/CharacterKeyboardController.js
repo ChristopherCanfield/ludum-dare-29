@@ -15,7 +15,7 @@ CharacterKeyboardController.prototype.setEntity = function(entity) {
 };
 
 CharacterKeyboardController.prototype.update = function() {
-	this.entity.move(0.1, 0, 0);
+	// this.entity.move(0.1, 0, 0);
 };
 
 CharacterKeyboardController.prototype.keyDown = function(e) {
@@ -40,20 +40,21 @@ CharacterKeyboardController.prototype.keyDown = function(e) {
             keyCode === KeyEvent.DOM_VK_A)
     {
         if (this.debug) console.log("Key: Left");
-        entity.applyCentralForce(new THREE.Vector3(-.1, 0, 0));
+        this.entity.applyCentralForce(new THREE.Vector3(-5, 0, 0));
     }
     else if (keyCode === KeyEvent.DOM_VK_RIGHT ||
             keyCode === KeyEvent.DOM_VK_D)
     {
         if (this.debug) console.log("Key: Right");
-        entity.applyCentralForce(new THREE.Vector3(.1, 0, 0));
+        this.entity.applyCentralForce(new THREE.Vector3(5, 0, 0));
+        this.entity.move(.3, 0, 0);
     }
     else if (keyCode === KeyEvent.DOM_VK_UP ||
             keyCode === KeyEvent.DOM_VK_W)
     {
         if (this.debug) console.log("Key: Up");
-        return this.camera.moveForward();
- 
+        //this.entity.applyCentralForce(new THREE.Vector3(0, 100, 0));
+ 		this.entity.move(0, .3, 0);
     }
     else if (keyCode === KeyEvent.DOM_VK_DOWN ||
             keyCode === KeyEvent.DOM_VK_S)
