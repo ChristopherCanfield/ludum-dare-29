@@ -4,6 +4,7 @@
  */
 
 function World(scene) {
+	this.scene = scene;
 	this.entities = [];
 };
 
@@ -21,6 +22,12 @@ World.prototype.update = function() {
 	}
 };
 
-World.prototype.addEntity = function(entity) {
-	this.entities.add(entity);
+World.prototype.add = function(entity) {
+	if (!(entity instanceof Entity))
+	{
+		throw "Invalid object added to entity.";
+	}
+	
+	this.entities.push(entity);
+	this.scene.add(entity.mesh);
 };

@@ -45,3 +45,17 @@ Entity.prototype.addController = function(controller) {
 	controller.setEntity(this);
 	this.controllers.push(controller);
 };
+
+Entity.prototype.setPosition = function(x, y, z) {
+	this.mesh.position.x = x;
+	this.mesh.position.y = y;
+	this.mesh.position.z = z;
+	
+	this.mesh.__dirtyPosition = true;
+};
+
+Entity.prototype.setRotation = function(x, y, z) {
+	this.mesh.rotation.x = x;
+	this.mesh.rotation.y = y;
+	this.mesh.rotation.z = z;
+};

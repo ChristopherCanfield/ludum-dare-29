@@ -28,25 +28,26 @@ initialize = function() {
         1,
         1000
     );
-    camera.position.set( 60, 50, 60 );
-    camera.lookAt( scene.position );
-    scene.add( camera );
+    camera.position.set(60, 50, 60);
+    camera.lookAt(scene.position);
+    scene.add(camera);
+
+	world = new World(scene);
 
     // Box
-    box = new Physijs.BoxMesh(
-        new THREE.BoxGeometry( 5, 5, 5 ),
+    box = new Entity(new Physijs.BoxMesh(
+        new THREE.BoxGeometry(5, 5, 5),
         Physijs.createMaterial(
 	        new THREE.MeshPhongMaterial({ color: 0x888888 }),
     	    0.8, // friction
     	    0.4 // restitution
     	),
     	10	// weight
-    );
-    box.position.set(0, 20, 0);
-    box.__dirtyPosition = true;
-    box.rotation.x += 0.5;
-    box.__dirtyRotation = true;
-    scene.add(box);
+    ));
+    box.setPosition(0, 20, 0);
+    box.setRotation(0.5, 0, 0);
+    world.add(box);
+    box.addController(new TestEnemy());
     
 	var light = new THREE.PointLight(0xffffff, 1, 100);
 	light.position.set(30, 30, 50);
@@ -65,8 +66,6 @@ initialize = function() {
 	ground.__dirtyPosition = true;
 	scene.add(ground);
 
-	world = new World(scene);
-
     requestAnimationFrame( render );
 };
 
@@ -77,8 +76,8 @@ render = function() {
     // render the scene.
     graphics.render(scene, camera);
      
-     // box.rotation.x += .05;
-     // box.__dirtyRotation = true;
+    // update the controllers.
+    world.update();
      
     requestAnimationFrame(render);
 };
