@@ -35,20 +35,21 @@ initialize = function() {
 	world = new World(scene);
 
     // Box
-    box = new Entity(new Physijs.BoxMesh(
-        new THREE.BoxGeometry(5, 5, 5),
-        Physijs.createMaterial(
-	        new THREE.MeshPhongMaterial({ color: 0x888888 }),
-    	    0.8, // friction
-    	    0.4 // restitution
-    	),
-    	10	// weight
-    ));
-    box.setPosition(0, 20, 0);
-    box.setRotation(0.5, 0, 0);
-    world.add(box);
-    box.addController(new TestEnemyController());
+    // box = new Entity(new Physijs.BoxMesh(
+        // new THREE.BoxGeometry(5, 5, 5),
+        // Physijs.createMaterial(
+	        // new THREE.MeshPhongMaterial({ color: 0x888888 }),
+    	    // 0.8, // friction
+    	    // 0.4 // restitution
+    	// ),
+    	// 10	// weight
+    // ));
+    // box.setPosition(0, 20, 0);
+    // box.setRotation(0.5, 0, 0);
+    // world.add(box);
+    // box.addController(new TestEnemyController());
     
+    box = Entities.createTestEnemy(world);
     
     
 	var light = new THREE.PointLight(0xffffff, 1, 100);

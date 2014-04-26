@@ -13,6 +13,7 @@ World.prototype.update = function() {
 	{
 		if (this.entities[i].isDisposed())
 		{
+			this.scene.remove(this.entities[i]);
 			this.entities.splice(i, 1);
 		}
 		else

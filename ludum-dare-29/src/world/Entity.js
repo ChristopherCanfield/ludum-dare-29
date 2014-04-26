@@ -59,3 +59,19 @@ Entity.prototype.setRotation = function(x, y, z) {
 	this.mesh.rotation.y = y;
 	this.mesh.rotation.z = z;
 };
+
+Entity.prototype.applyImpulse = function(force, offset) {
+	this.mesh.applyImpulse(force, offset);
+};
+
+Entity.prototype.applyCentralImpulse = function(force) {
+	this.mesh.applyCentralImpulse;
+};
+
+Entity.prototype.applyForce = function(force, offset) {
+	this.mesh.applyForce(force, offset);
+};
+
+Entity.prototype.applyCentralForce = function(force) {
+	this.mesh.applyCentralForce(force);
+};
