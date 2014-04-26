@@ -7,7 +7,12 @@ function CharacterKeyboardController() {
 	this.entity = null;
 	this.debug = false;
 	
-	window.addEventListener("keydown", this.keyDown.bind(this), false);
+	this.moveRight = false;
+	this.moveLeft = false;
+	this.jump = false;
+	
+	$(window).keydown(this.keyDown.bind(this));
+	$(window).keyup(this.keyUp.bind(this));
 };
 
 CharacterKeyboardController.prototype.setEntity = function(entity) {
@@ -15,39 +20,36 @@ CharacterKeyboardController.prototype.setEntity = function(entity) {
 };
 
 CharacterKeyboardController.prototype.update = function() {
-	// this.entity.move(0.1, 0, 0);
+	if (this.moveRight)
+	{
+		this.entity.applyCentralForce(new THREE.Vector3(5, 0, 0));
+	}
+	else if (this.moveLeft)
+	{
+		this.entity.applyCentralForce(new THREE.Vector3(-5, 0, 0));
+	}
+	
+	if (this.jump)
+	{
+		// TODO: jump.
+		this.jump = false;
+	}
 };
 
 CharacterKeyboardController.prototype.keyDown = function(e) {
-    if (typeof KeyEvent == "undefined") {
-        var KeyEvent = {
-            DOM_VK_LEFT: 37,
-            DOM_VK_RIGHT: 39,
-            DOM_VK_UP: 38,
-            DOM_VK_DOWN: 40,
-            DOM_VK_W: 87,
-            DOM_VK_A: 65,
-            DOM_VK_S: 83,
-            DOM_VK_D: 68,
-            DOM_VK_Q: 81,
-            DOM_VK_E: 69
-        };
-    }
-        
-    var keyCode = e.keyCode || e.which;
+    var keyCode = e.which;
     
     if (keyCode === KeyEvent.DOM_VK_LEFT ||
             keyCode === KeyEvent.DOM_VK_A)
     {
         if (this.debug) console.log("Key: Left");
-        this.entity.applyCentralForce(new THREE.Vector3(-5, 0, 0));
+        this.moveLeft = true;
     }
     else if (keyCode === KeyEvent.DOM_VK_RIGHT ||
             keyCode === KeyEvent.DOM_VK_D)
     {
         if (this.debug) console.log("Key: Right");
-        this.entity.applyCentralForce(new THREE.Vector3(5, 0, 0));
-        this.entity.move(.3, 0, 0);
+        this.moveRight = true;
     }
     else if (keyCode === KeyEvent.DOM_VK_UP ||
             keyCode === KeyEvent.DOM_VK_W)
@@ -82,5 +84,20 @@ CharacterKeyboardController.prototype.keyDown = function(e) {
                 this.doors[i].open();
             }
         }
+    }
+};
+
+CharacterKeyboardController.prototype.keyUp = function(e) {
+	var keyCode = e.which;
+    
+    if (keyCode === KeyEvent.DOM_VK_LEFT ||
+            keyCode === KeyEvent.DOM_VK_A)
+    {
+        this.moveLeft = false;
+    }
+    else if (keyCode === KeyEvent.DOM_VK_RIGHT ||
+            keyCode === KeyEvent.DOM_VK_D)
+    {
+        this.moveRight = false;
     }
 };

@@ -33,29 +33,18 @@ initialize = function() {
     scene.add(camera);
 
 	world = new World(scene);
-
-    // Box
-    // box = new Entity(new Physijs.BoxMesh(
-        // new THREE.BoxGeometry(5, 5, 5),
-        // Physijs.createMaterial(
-	        // new THREE.MeshPhongMaterial({ color: 0x888888 }),
-    	    // 0.8, // friction
-    	    // 0.4 // restitution
-    	// ),
-    	// 10	// weight
-    // ));
-    // box.setPosition(0, 20, 0);
-    // box.setRotation(0.5, 0, 0);
-    // world.add(box);
-    // box.addController(new TestEnemyController());
     
     box = Entities.createTestEnemy(world, new THREE.Vector3(0, 20, 0));
     
     Entities.createControllableTestEntity(world, new THREE.Vector3(-20, 5, 0));
     
 	var light = new THREE.PointLight(0xffffff, 1, 100);
-	light.position.set(30, 30, 50);
+	light.position.set(60, 30, 10);
 	scene.add(light);
+	
+	var light2 = new THREE.PointLight(0xffffff, 1, 100);
+	light2.position.set(-30, 30, 10);
+	scene.add(light2);
 	
 	var ground = new Physijs.BoxMesh(
 		new THREE.BoxGeometry(250, 1, 50),
