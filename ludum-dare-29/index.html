@@ -6,7 +6,7 @@
 		<title>Canfield Game</title>
 		<meta name="description" content="Canfield Ludum Dare 29 Game">
 		<meta name="author" content="Christopher D. Canfield">
-		
+
 		<style type="text/css">
 			.textboxLabelDefault {
 				float: left;
@@ -17,25 +17,32 @@
 				margin-top: 8px;
 				margin-bottom: 8px;
 			}
-			
+
 			.defaultText {
 				margin-top: 8px;
 				margin-bottom: 8px;
 				margin-right: 5px;
 			}
-			
+
 			.blockDisplay {
 				display: block;
 			}
 		</style>
-		
+
 		<!-- Libraries -->
 		<script type="text/javascript" src="libs/threejs/three.js"></script>
 		<script type="text/javascript" src="libs/physijs/physi.js"></script>
+
+		<!-- World -->
+		<script type="text/javascript" src="src/world/Entity.js"></script>
+		<script type="text/javascript" src="src/world/World.js"></script>
 		
+		<!-- Controllers -->
+		<script type="text/javascript" src="src/controller/TestEnemy.js"></script>
+
 		<!-- The entry point into the program. -->
 		<script type="text/javascript" src="src/main.js"></script>
-		
+
 		<script type="text/javascript">
 			'use strict';
 
@@ -44,21 +51,21 @@
 	</head>
 
 	<body>
-			<div id="viewport"></div>
-			
-			<!-- <span class="blockDisplay ">
-				<span style="font-weight: bold">Controls:</span><br>
-				Forward: Up or W<br>
-				Backward: Down or S<br>
-				Rotate: Left/Right or A/D<br>
-				Strafe: ctrl-Left/ctrl-Right or ctrl-A/ctrl-D<br>
-			</span> -->
+		<div id="viewport"></div>
+
+		<!-- <span class="blockDisplay ">
+		<span style="font-weight: bold">Controls:</span><br>
+		Forward: Up or W<br>
+		Backward: Down or S<br>
+		Rotate: Left/Right or A/D<br>
+		Strafe: ctrl-Left/ctrl-Right or ctrl-A/ctrl-D<br>
+		</span> -->
 
 		<div style="clear:both">
 			<footer>
-			    Christopher D. Canfield<br>
-			    Caitlin F. Canfield<br>
-			    Divergent Thoughts Games
+				Caitlin &amp; Christopher Canfield
+				<br>
+				Divergent Thoughts Games
 			</footer>
 		</div>
 	</body>
