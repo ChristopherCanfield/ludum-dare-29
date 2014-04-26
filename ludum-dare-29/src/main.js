@@ -28,8 +28,8 @@ initialize = function() {
         1,
         1000
     );
-    camera.position.set(60, 50, 60);
-    camera.lookAt(scene.position);
+    camera.position.set(10, 30, 250);
+    // camera.lookAt(scene.position);
     scene.add(camera);
 
 	world = new World(scene);
@@ -54,7 +54,7 @@ initialize = function() {
 	scene.add(light);
 	
 	var ground = new Physijs.BoxMesh(
-		new THREE.BoxGeometry(50, 1, 50),
+		new THREE.BoxGeometry(250, 1, 50),
 		Physijs.createMaterial(
 			new THREE.MeshPhongMaterial({ color: 0x0094ff}),
 			0.9, // friction
