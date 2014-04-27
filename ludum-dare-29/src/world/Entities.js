@@ -41,8 +41,8 @@ Entities.createControllableTestEntity = function(world, position) {
         new THREE.BoxGeometry(5, 5, 5),
         Physijs.createMaterial(
 	        new THREE.MeshPhongMaterial({ color: 0x888888 }),
-    	    0.8, // friction
-    	    0.4 // restitution
+    	    0.1, // friction
+    	    0.05 // restitution
     	),
     	10	// weight
     ));

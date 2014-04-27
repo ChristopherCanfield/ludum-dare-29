@@ -19,7 +19,7 @@ initialize = function() {
     graphics.setSize( window.innerWidth, window.innerHeight );
     document.getElementById("viewport").appendChild(graphics.domElement);
 
-    scene = new Physijs.Scene({ fixedTimeStep: 1/60});
+    scene = new Physijs.Scene({ fixedTimeStep: 1/60 });
     scene.setGravity(new THREE.Vector3(0, -3, 0));
 
     camera = new THREE.PerspectiveCamera(
@@ -50,8 +50,8 @@ initialize = function() {
 		new THREE.BoxGeometry(250, 1, 50),
 		Physijs.createMaterial(
 			new THREE.MeshPhongMaterial({ color: 0x0094ff}),
-			0.9, // friction
-			0.3	// restitution
+			0.2, // friction
+			0.2	// restitution
 		),
 		0 // weight
 	);
