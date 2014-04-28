@@ -17,7 +17,7 @@ Levels.createLevelOne = function(scene, world) {
 	light2.position.set(-30, 30, 20);
 	scene.add(light2);
 	
-	var light = new THREE.AmbientLight(0x606060);
+	var light = new THREE.AmbientLight(0x444444);
 	scene.add(light);
 	
 	// Add the ground.
@@ -82,7 +82,7 @@ Levels.createLevelOne = function(scene, world) {
 	var i = 0;
 	for (i = 0; i < 4; ++i)
 	{
-		var box = new Physijs.SphereMesh(
+		var sphere = new Physijs.SphereMesh(
 			new THREE.SphereGeometry(2.5, 16, 16),
 			Physijs.createMaterial(
 				new THREE.MeshPhongMaterial({ 
@@ -93,21 +93,25 @@ Levels.createLevelOne = function(scene, world) {
 			5 // weight
 		);
 		
-		box.position.set(i * 40, 13, 0);
-		box.__dirtyPosition = true;
-		scene.add(box);
+		sphere.position.set(i * 40, 13, 0);
+		sphere.__dirtyPosition = true;
+		scene.add(sphere);
 	}
 	
 	var geometry = new THREE.SphereGeometry(75, 32, 32);
 	var material = new THREE.MeshPhongMaterial({color: 0xffffff}); 
-	var sphere = new THREE.Mesh(geometry, material);
+	var sphere = new Physijs.SphereMesh(geometry, 
+		Physijs.createMaterial(material, 0.4, 0.6), 0);
 	sphere.position.set(0, -10, -120);
+	sphere.__dirtyPosition = true;
 	scene.add(sphere);
 	
 	var geometry = new THREE.SphereGeometry(50, 32, 32);
-	var material = new THREE.MeshPhongMaterial({color: 0xffffff}); 
-	var sphere = new THREE.Mesh(geometry, material);
+	var material = new THREE.MeshPhongMaterial({color: 0xffffff});
+	var sphere = new Physijs.SphereMesh(geometry, 
+		Physijs.createMaterial(material, 0.4, 0.6), 0);
 	sphere.position.set(100, -10, -65);
+	sphere.__dirtyPosition = true;
 	scene.add(sphere);
 	
 	var geometry = new THREE.SphereGeometry(65, 32, 32);
