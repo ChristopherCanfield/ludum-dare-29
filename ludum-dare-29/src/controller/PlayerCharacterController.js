@@ -24,7 +24,7 @@ PlayerCharacterController.prototype.update = function() {
 	var velocity = this.entity.mesh.getLinearVelocity();
 	if (this.moveRight)
 	{
-		if (Math.abs(velocity.x) < 5)
+		if (velocity.x < 5)
 		{
 			this.entity.mesh.setLinearVelocity({x: 5, y: velocity.y, z: 0});
 		}
@@ -32,7 +32,7 @@ PlayerCharacterController.prototype.update = function() {
 	}
 	else if (this.moveLeft)
 	{
-		if (Math.abs(velocity.x) < 5)
+		if (velocity.x > -5)
 		{
 			this.entity.mesh.setLinearVelocity({x: -5, y: velocity.y, z: 0});
 		}
@@ -61,12 +61,14 @@ PlayerCharacterController.prototype.keyDown = function(e) {
     {
         if (this.debug) console.log("Key: Left");
         this.moveLeft = true;
+        this.moveRight = false;
     }
     else if (keyCode === KeyEvent.DOM_VK_RIGHT ||
             keyCode === KeyEvent.DOM_VK_D)
     {
         if (this.debug) console.log("Key: Right");
         this.moveRight = true;
+        this.moveLeft = false;
     }
     else if (keyCode === KeyEvent.DOM_VK_UP ||
             keyCode === KeyEvent.DOM_VK_W)
