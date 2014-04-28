@@ -17,25 +17,40 @@ function PlayerCharacterController() {
 
 PlayerCharacterController.prototype.setEntity = function(entity) {
 	this.entity = entity;
+	this.entity.mesh.setAngularFactor({ x: 0, y: 0, z: 0 });
 };
 
 PlayerCharacterController.prototype.update = function() {
+	var velocity = this.entity.mesh.getLinearVelocity();
 	if (this.moveRight)
 	{
-		this.entity.move(1, 0, 0);
-		// this.entity.applyCentralForce(new THREE.Vector3(5, 0, 0));
+		if (Math.abs(velocity.x) < 5)
+		{
+			this.entity.mesh.setLinearVelocity({x: 5, y: velocity.y, z: 0});
+		}
+		this.entity.applyCentralForce(new THREE.Vector3(35, 0, 0));
 	}
 	else if (this.moveLeft)
 	{
-		this.entity.move(-1, 0, 0);
-		// this.entity.applyCentralForce(new THREE.Vector3(-5, 0, 0));
+		if (Math.abs(velocity.x) < 5)
+		{
+			this.entity.mesh.setLinearVelocity({x: -5, y: velocity.y, z: 0});
+		}
+		this.entity.applyCentralForce(new THREE.Vector3(-35, 0, 0));
+	}
+	else
+	{
+		this.entity.mesh.setLinearVelocity({ x: 0, y: velocity.y, z: 0});
 	}
 	
 	if (this.jump)
 	{
-		// TODO: jump.
+		this.entity.applyCentralForce(new THREE.Vector3(0, 100, 0));
 		this.jump = false;
 	}
+	
+	this.entity.mesh.setAngularFactor({ x: 0, y: 0, z: 0 });
+	this.entity.rotation = new THREE.Vector3(0, 0, 0);
 };
 
 PlayerCharacterController.prototype.keyDown = function(e) {
@@ -56,20 +71,7 @@ PlayerCharacterController.prototype.keyDown = function(e) {
     else if (keyCode === KeyEvent.DOM_VK_UP ||
             keyCode === KeyEvent.DOM_VK_W)
     {
-        if (this.debug) console.log("Key: Up");
-        //this.entity.applyCentralForce(new THREE.Vector3(0, 100, 0));
- 		this.entity.move(0, .3, 0);
-    }
-    else if (keyCode === KeyEvent.DOM_VK_DOWN ||
-            keyCode === KeyEvent.DOM_VK_S)
-    {
-        if (this.debug) console.log("Key: Down");
-        return this.camera.moveBackward();
-    }
-    else if (keyCode === KeyEvent.DOM_VK_Q)
-    {
-        this.camera.rotate180();
-        return true;
+        this.jump = true;
     }
     else if (keyCode === KeyEvent.DOM_VK_E)
     {

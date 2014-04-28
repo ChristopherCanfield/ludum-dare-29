@@ -35,8 +35,9 @@ Entities.createTestEnemy = function(world, position) {
  * Simple controllable test entity.
  * @param {Object} world
  * @param {THREE.Vector3} position the starting position.
+ * @param {Camera} camera
  */
-Entities.createControllableTestEntity = function(world, position) {
+Entities.createControllableTestEntity = function(world, position, camera) {
 	var entity = new Entity(new Physijs.CapsuleMesh(
         new THREE.BoxGeometry(5, 5, 5),
         Physijs.createMaterial(
@@ -46,8 +47,11 @@ Entities.createControllableTestEntity = function(world, position) {
     	),
     	10	// weight
     ));
-    entity.addController(new PlayerCharacterController());
+    
     entity.setPosition(position.x, position.y, position.z);
+    
+    entity.addController(new PlayerCharacterController());
+    entity.addController(new CameraController(camera));
     
     world.add(entity);
     
