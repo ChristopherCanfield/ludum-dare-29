@@ -46,7 +46,7 @@ Entities.createControllableTestEntity = function(world, position) {
     	),
     	10	// weight
     ));
-    entity.addController(new CharacterKeyboardController());
+    entity.addController(new PlayerCharacterController());
     entity.setPosition(position.x, position.y, position.z);
     
     world.add(entity);

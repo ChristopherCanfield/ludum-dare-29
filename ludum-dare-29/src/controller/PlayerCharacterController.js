@@ -1,9 +1,9 @@
 /**
- * CharacterKeyboardController.js
+ * PlayerCharacterController.js
  * @author Christopher D. Canfield
  */
 
-function CharacterKeyboardController() {
+function PlayerCharacterController() {
 	this.entity = null;
 	this.debug = false;
 	
@@ -15,18 +15,20 @@ function CharacterKeyboardController() {
 	$(window).keyup(this.keyUp.bind(this));
 };
 
-CharacterKeyboardController.prototype.setEntity = function(entity) {
+PlayerCharacterController.prototype.setEntity = function(entity) {
 	this.entity = entity;
 };
 
-CharacterKeyboardController.prototype.update = function() {
+PlayerCharacterController.prototype.update = function() {
 	if (this.moveRight)
 	{
-		this.entity.applyCentralForce(new THREE.Vector3(5, 0, 0));
+		this.entity.move(1, 0, 0);
+		// this.entity.applyCentralForce(new THREE.Vector3(5, 0, 0));
 	}
 	else if (this.moveLeft)
 	{
-		this.entity.applyCentralForce(new THREE.Vector3(-5, 0, 0));
+		this.entity.move(-1, 0, 0);
+		// this.entity.applyCentralForce(new THREE.Vector3(-5, 0, 0));
 	}
 	
 	if (this.jump)
@@ -36,7 +38,7 @@ CharacterKeyboardController.prototype.update = function() {
 	}
 };
 
-CharacterKeyboardController.prototype.keyDown = function(e) {
+PlayerCharacterController.prototype.keyDown = function(e) {
     var keyCode = e.which;
     
     if (keyCode === KeyEvent.DOM_VK_LEFT ||
@@ -87,7 +89,7 @@ CharacterKeyboardController.prototype.keyDown = function(e) {
     }
 };
 
-CharacterKeyboardController.prototype.keyUp = function(e) {
+PlayerCharacterController.prototype.keyUp = function(e) {
 	var keyCode = e.which;
     
     if (keyCode === KeyEvent.DOM_VK_LEFT ||
