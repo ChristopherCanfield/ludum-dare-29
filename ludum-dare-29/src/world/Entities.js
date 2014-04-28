@@ -38,16 +38,32 @@ Entities.createTestEnemy = function(world, position) {
  * @param {Camera} camera
  */
 Entities.createControllableTestEntity = function(world, position, camera) {
+	var texture = TextureManager.getTexture(TexturePath.Exoskeleton);
+	
+	var textureAtlas = [
+			// Lower left corner
+			new THREE.Vector2(0, 0.207), 
+			// Lower right corner
+			new THREE.Vector2(0, 0.207),
+			// Upper right corner 
+			new THREE.Vector2(0, 1),
+			// Upper left corner 
+			new THREE.Vector2(0, 1)];
+	
 	var entity = new Entity(new Physijs.CapsuleMesh(
         new THREE.BoxGeometry(5, 5, 5),
         Physijs.createMaterial(
-	        new THREE.MeshPhongMaterial({ 
+	        new THREE.MeshLambertMaterial({ 
 	        	color: 0x888888 }),
     	    0.1, // friction
     	    0.05 // restitution
     	),
     	10	// weight
     ));
+    
+    entity.geometry.faceVertexUvs[0] = [];
+    entity.geometry.faceVertexUvs[0][0] = [textureAtlas[0], textureAtlas[1], textureAtlas[3]];
+	entity.geometry.faceVertexUvs[0][1] = [textureAtlas[1], textureAtlas[2], textureAtlas[3]];
     
     entity.setPosition(position.x, position.y, position.z);
     
