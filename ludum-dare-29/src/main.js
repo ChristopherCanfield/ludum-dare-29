@@ -22,6 +22,8 @@ initialize = function() {
 
     scene = new Physijs.Scene({ fixedTimeStep: 1/120 });
     scene.setGravity(new THREE.Vector3(0, -9.8, 0));
+    
+    TextureManager.gl = graphics.context;
 
     camera = new THREE.PerspectiveCamera(
         35,
@@ -49,15 +51,22 @@ initialize = function() {
 	light2.rotation.set(0, 30, 0);
 	scene.add(light2);
 	
+	var rockTexture = TextureManager.getTexture(TexturePath.Rock).clone();
+	rockTexture.repeat.set(10, 1);
+	rockTexture.needsUpdate = true;
 	var ground = new Physijs.BoxMesh(
-		new THREE.BoxGeometry(10000, 1, 50),
+		new THREE.BoxGeometry(100, 1, 50),
 		Physijs.createMaterial(
-			new THREE.MeshPhongMaterial({ color: 0x0094ff}),
+			new THREE.MeshLambertMaterial({ map: rockTexture }),
 			0.2, // friction
 			0.2	// restitution
 		),
 		0 // weight
 	);
+	
+	ground.material.wrapS = THREE.RepeatWrapping;
+	ground.material.wrapT = THREE.RepeatWrapping;
+	
 	ground.position.set(0, 0, 0);
 	ground.__dirtyPosition = true;
 	scene.add(ground);

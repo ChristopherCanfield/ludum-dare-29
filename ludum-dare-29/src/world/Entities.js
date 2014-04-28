@@ -41,7 +41,8 @@ Entities.createControllableTestEntity = function(world, position, camera) {
 	var entity = new Entity(new Physijs.CapsuleMesh(
         new THREE.BoxGeometry(5, 5, 5),
         Physijs.createMaterial(
-	        new THREE.MeshPhongMaterial({ color: 0x888888 }),
+	        new THREE.MeshPhongMaterial({ 
+	        	color: 0x888888 }),
     	    0.1, // friction
     	    0.05 // restitution
     	),

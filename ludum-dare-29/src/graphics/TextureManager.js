@@ -25,10 +25,10 @@ TextureManager.textures = {};
 /**
  * Returns a reference to the specified texture. Loads the texture if necessary.
  * @param {String} texturePath
- * @param {} THREE.ClampToEdgeWrapping: the edge is clamped to the outer edge texels. 
+ * THREE.ClampToEdgeWrapping: the edge is clamped to the outer edge texels. 
  * The other two choices are THREE.RepeatWrapping and THREE.MirroredRepeatWrapping.
  */
-TextureManager.getTexture = function(texturePath, repeat) {    
+TextureManager.getTexture = function(texturePath) {    
     if (texturePath in TextureManager.textures)
     {
         return TextureManager.textures[texturePath];
@@ -36,9 +36,7 @@ TextureManager.getTexture = function(texturePath, repeat) {
     else
     {
         var t = THREE.ImageUtils.loadTexture(texturePath);
-        t.wrapS = repeat;
-        t.wrapT = repeat;
-        t.anisotropy = TextureManager.gl.getMaxAnisotropy();
+        // t.anisotropy = TextureManager.gl.getMaxAnisotropy();
         TextureManager.textures[texturePath] = t;
         return t;        
     }
