@@ -50,21 +50,44 @@ Entities.createControllableTestEntity = function(world, position, camera) {
 			// Upper left corner 
 			new THREE.Vector2(0, 1)];
 	
+	var geometry = new THREE.BoxGeometry(7, 10, 0.1);
+    // geometry.faceVertexUvs[0] = [];
+    
+    // geometry.faceVertexUvs[0][0] = [textureAtlas[0], textureAtlas[1], textureAtlas[3]];
+	// geometry.faceVertexUvs[0][1] = [textureAtlas[1], textureAtlas[2], textureAtlas[3]];
+	
+    // geometry.faceVertexUvs[0][2] = [textureAtlas[0], textureAtlas[1], textureAtlas[3]];
+	// geometry.faceVertexUvs[0][3] = [textureAtlas[1], textureAtlas[2], textureAtlas[3]];
+// 	
+	// geometry.faceVertexUvs[0][4] = [textureAtlas[0], textureAtlas[1], textureAtlas[3]];
+	// geometry.faceVertexUvs[0][5] = [textureAtlas[1], textureAtlas[2], textureAtlas[3]];
+// 	
+	// geometry.faceVertexUvs[0][6] = [textureAtlas[0], textureAtlas[1], textureAtlas[3]];
+	// geometry.faceVertexUvs[0][7] = [textureAtlas[1], textureAtlas[2], textureAtlas[3]];
+// 	
+	// geometry.faceVertexUvs[0][8] = [textureAtlas[0], textureAtlas[1], textureAtlas[3]];
+	// geometry.faceVertexUvs[0][9] = [textureAtlas[1], textureAtlas[2], textureAtlas[3]];
+// 	
+	// geometry.faceVertexUvs[0][10] = [textureAtlas[0], textureAtlas[1], textureAtlas[3]];
+	// geometry.faceVertexUvs[0][11] = [textureAtlas[1], textureAtlas[2], textureAtlas[3]];
+	
+	geometry.uvsNeedUpdate = true;
+	
 	var entity = new Entity(new Physijs.CapsuleMesh(
-        new THREE.BoxGeometry(5, 5, 5),
+        geometry,
         Physijs.createMaterial(
-	        new THREE.MeshLambertMaterial({ 
-	        	color: 0x888888 }),
+	        new THREE.MeshBasicMaterial({ 
+	        	color: 0x888888,
+	        	map: texture,
+	        	transparent: true }),
     	    0.1, // friction
     	    0.05 // restitution
     	),
     	10	// weight
     ));
     
-    entity.geometry.faceVertexUvs[0] = [];
-    entity.geometry.faceVertexUvs[0][0] = [textureAtlas[0], textureAtlas[1], textureAtlas[3]];
-	entity.geometry.faceVertexUvs[0][1] = [textureAtlas[1], textureAtlas[2], textureAtlas[3]];
-    
+    // mesh = new THREE.Mesh(geometry,  material);
+	
     entity.setPosition(position.x, position.y, position.z);
     
     entity.addController(new PlayerCharacterController());
