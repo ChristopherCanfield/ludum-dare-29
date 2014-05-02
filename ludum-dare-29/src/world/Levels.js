@@ -8,6 +8,30 @@ function Levels() {}
 
 
 Levels.createLevelOne = function(scene, world) {
+	Levels.one.addLights(scene);
+	
+	Levels.one.addGround(scene);
+	Levels.one.addCeiling(scene);
+	
+	Levels.one.addPhysicsObjects(scene);
+	
+	Levels.one.addBackground(scene);
+	
+	// Pillar.
+	var geometry = new THREE.BoxGeometry(10, 200, 5);
+	var material = new THREE.MeshPhongMaterial({color: 0x705D00}); 
+	var pillar = new THREE.Mesh(geometry, material);
+	pillar.position.set(50, -20, 20);
+	scene.add(pillar);
+	
+	// Add entities.
+	Levels.one.addEnemies(scene, world);
+    Entities.createControllableTestEntity(world, new THREE.Vector3(-20, 5, 0), camera);
+};
+
+Levels.one = {};
+
+Levels.one.addLights = function(scene) {
 	var light = new THREE.PointLight(0xffffff, 1, 100);
 	light.position.set(60, 30, -10);
 	// light.rotation.set(0, 30, 0);
@@ -17,9 +41,10 @@ Levels.createLevelOne = function(scene, world) {
 	light2.position.set(-30, 30, 20);
 	scene.add(light2);
 	
-	var light = new THREE.AmbientLight(0x444444);
-	scene.add(light);
-	
+	scene.add(new THREE.AmbientLight(0x444444));
+};
+
+Levels.one.addGround = function(scene) {
 	// Add the ground.
 	var rockTexture = TextureManager.getTexture(TexturePath.Rock).clone();
 	rockTexture.repeat.set(10, 2);
@@ -41,8 +66,9 @@ Levels.createLevelOne = function(scene, world) {
 	ground.position.set(0, -50, 0);
 	ground.__dirtyPosition = true;
 	scene.add(ground);
-	
-	// Add the ceiling.
+};
+
+Levels.one.addCeiling = function(scene) {
 	var ceiling = new Physijs.BoxMesh(
 		new THREE.BoxGeometry(1000, 100, 50),
 		Physijs.createMaterial(
@@ -57,7 +83,9 @@ Levels.createLevelOne = function(scene, world) {
 	ceiling.position.set(0, 125, 0);
 	ceiling.__dirtyPosition = true;
 	scene.add(ceiling);
-	
+};
+
+Levels.one.addPhysicsObjects = function(scene) {
 	// Add multiple boxes.
 	var i = 0;
 	for (i = 0; i < 5; ++i)
@@ -97,7 +125,13 @@ Levels.createLevelOne = function(scene, world) {
 		sphere.__dirtyPosition = true;
 		scene.add(sphere);
 	}
+};
 	
+Levels.one.addEnemies = function(scene, world) {
+	Entities.createTestEnemy(world, new THREE.Vector3(0, 20, 0));
+};
+
+Levels.one.addBackground = function(scene) {
 	var geometry = new THREE.SphereGeometry(75, 32, 32);
 	var material = new THREE.MeshPhongMaterial({color: 0xffffff}); 
 	var sphere = new Physijs.SphereMesh(geometry, 
@@ -119,14 +153,4 @@ Levels.createLevelOne = function(scene, world) {
 	var sphere = new THREE.Mesh(geometry, material);
 	sphere.position.set(-75, -20, -75);
 	scene.add(sphere);
-	
-	var geometry = new THREE.BoxGeometry(10, 200, 5);
-	var material = new THREE.MeshPhongMaterial({color: 0x705D00}); 
-	var pillar = new THREE.Mesh(geometry, material);
-	pillar.position.set(50, -20, 20);
-	scene.add(pillar);
-	
-	// Add entities.
-	Entities.createTestEnemy(world, new THREE.Vector3(0, 20, 0));
-    Entities.createControllableTestEntity(world, new THREE.Vector3(-20, 5, 0), camera);
 };
