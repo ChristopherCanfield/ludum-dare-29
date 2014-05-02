@@ -5,7 +5,6 @@
 
 function PlayerCharacterController() {
 	this.entity = null;
-	this.debug = false;
 	
 	this.moveRight = false;
 	this.moveLeft = false;
@@ -16,8 +15,8 @@ function PlayerCharacterController() {
 	this.jump = false;
 	
 	this.ACCELERATION = 50;
-	this.MAX_SPEED = 10;
-	this.INITIAL_VELOCITY = 5;
+	this.MAX_SPEED = 20;
+	this.INITIAL_VELOCITY = 20;
 	
 	$(window).keydown(this.keyDown.bind(this));
 	$(window).keyup(this.keyUp.bind(this));
@@ -50,7 +49,7 @@ PlayerCharacterController.prototype.processX = function(velocity) {
 		{
 			this.entity.mesh.setLinearVelocity({x: this.MAX_SPEED, y: velocity.y, z: velocity.z});
 		}
-		else if (velocity.x === 0)
+		else if (velocity.x <= 0)
 		{
 			this.entity.mesh.setLinearVelocity({x: this.INITIAL_VELOCITY, y: 0, z: 0});
 		}
@@ -62,7 +61,7 @@ PlayerCharacterController.prototype.processX = function(velocity) {
 		{
 			this.entity.mesh.setLinearVelocity({x: -this.MAX_SPEED, y: velocity.y, z: velocity.z});
 		}
-		else if (velocity.x === 0)
+		else if (velocity.x >= 0)
 		{
 			this.entity.mesh.setLinearVelocity({x: -this.INITIAL_VELOCITY, y: 0, z: 0});
 		}
@@ -82,7 +81,7 @@ PlayerCharacterController.prototype.processZ = function(velocity) {
 		{
 			this.entity.mesh.setLinearVelocity({x: velocity.x, y: velocity.y, z: -this.MAX_SPEED});
 		}
-		else if (velocity.z === 0)
+		else if (velocity.z >= 0)
 		{
 			this.entity.mesh.setLinearVelocity({x: 0, y: 0, z: -this.INITIAL_VELOCITY});
 		}
@@ -94,7 +93,7 @@ PlayerCharacterController.prototype.processZ = function(velocity) {
 		{
 			this.entity.mesh.setLinearVelocity({x: velocity.x, y: velocity.y, z: this.MAX_SPEED});
 		}
-		else if (velocity.z === 0)
+		else if (velocity.z <= 0)
 		{
 			this.entity.mesh.setLinearVelocity({x: 0, y: 0, z: this.INITIAL_VELOCITY});
 		}
@@ -115,14 +114,12 @@ PlayerCharacterController.prototype.keyDown = function(e) {
     if (keyCode === KeyEvent.DOM_VK_LEFT ||
             keyCode === KeyEvent.DOM_VK_A)
     {
-        if (this.debug) console.log("Key: Left");
         this.moveLeft = true;
         this.moveRight = false;
     }
     else if (keyCode === KeyEvent.DOM_VK_RIGHT ||
             keyCode === KeyEvent.DOM_VK_D)
     {
-        if (this.debug) console.log("Key: Right");
         this.moveRight = true;
         this.moveLeft = false;
     }
