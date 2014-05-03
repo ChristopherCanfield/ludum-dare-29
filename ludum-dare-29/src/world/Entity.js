@@ -7,6 +7,7 @@ function Entity(mesh) {
 	this.mesh = mesh;
 	this.disposed = false;
 	this.controllers = [];
+	this.components = [];
 };
 
 Entity.prototype.update = function() {
@@ -15,6 +16,15 @@ Entity.prototype.update = function() {
 	{
 		this.controllers[i].update();
 	}
+};
+
+Entity.prototype.addController = function(controller) {
+	controller.setEntity(this);
+	this.controllers.push(controller);
+};
+
+Entity.prototype.addComponent = function(component) {
+	this.components.push(component.getClass(), component);
 };
 
 Entity.prototype.dispose = function() {
@@ -39,11 +49,6 @@ Entity.prototype.rotate = function(x, y, z) {
 	this.mesh.rotation.z += z;
 
 	this.mesh.__dirtyRotation = true;
-};
-
-Entity.prototype.addController = function(controller) {
-	controller.setEntity(this);
-	this.controllers.push(controller);
 };
 
 Entity.prototype.setPosition = function(x, y, z) {
