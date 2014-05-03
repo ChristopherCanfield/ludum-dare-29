@@ -32,7 +32,7 @@ Entity.prototype.getComponent = function(componentClass) {
 };
 
 Entity.prototype.dispose = function() {
-	this.dispose = true;
+	this.disposed = true;
 };
 
 Entity.prototype.isDisposed = function() {

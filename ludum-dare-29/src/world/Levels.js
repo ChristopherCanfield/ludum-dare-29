@@ -94,7 +94,9 @@ Levels.one.addPhysicsObjects = function(scene) {
 			new THREE.BoxGeometry(10, 10, 10),
 			Physijs.createMaterial(
 				new THREE.MeshPhongMaterial({ 
-					color: 0x0026C2 }),
+					color: 0x0026C2,
+					specular: 0x0026C2,
+					metal: 0.75 }),
 				0.4, // friction
 				0.5	// restitution
 			),
@@ -114,7 +116,7 @@ Levels.one.addPhysicsObjects = function(scene) {
 			new THREE.SphereGeometry(2.5, 16, 16),
 			Physijs.createMaterial(
 				new THREE.MeshPhongMaterial({ 
-					color: 0x7F0000 }),
+					color: 0x7F0000}),
 				0.4, // friction
 				0.5	// restitution
 			),
