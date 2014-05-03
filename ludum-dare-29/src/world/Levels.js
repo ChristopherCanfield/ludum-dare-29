@@ -100,7 +100,7 @@ Levels.one.addPhysicsObjects = function(scene) {
 				0.4, // friction
 				0.5	// restitution
 			),
-			2 // weight
+			4 // weight
 		);
 		
 		box.position.set(i * 20, 5, 0);
