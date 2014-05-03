@@ -33,21 +33,29 @@ Levels.one = {};
 
 Levels.one.addLights = function(scene) {
 	var light = new THREE.PointLight(0xffffff, 1, 100);
-	light.position.set(60, 30, -10);
+	light.position.set(60, 40, -10);
 	// light.rotation.set(0, 30, 0);
 	scene.add(light);
+	var pointLightHelper = new THREE.PointLightHelper(light, 1); 
+	scene.add(pointLightHelper);
 	
 	var light2 = new THREE.PointLight(0xffffff, 1, 100);
-	light2.position.set(-30, 30, 20);
+	light2.position.set(-30, 40, 20);
 	scene.add(light2);
+	var pointLightHelper = new THREE.PointLightHelper(light2, 1); 
+	scene.add(pointLightHelper);
 	
 	var light3 = new THREE.PointLight(0xFFF67F, 1, 100);
-	light3.position.set(200, 30, 20);
+	light3.position.set(200, 40, 20);
 	scene.add(light3);
+	var pointLightHelper = new THREE.PointLightHelper(light3, 1); 
+	scene.add(pointLightHelper);
 	
 	var light4 = new THREE.PointLight(0xFFF67F, 1, 100);
-	light4.position.set(325, 30, 20);
+	light4.position.set(325, 40, 20);
 	scene.add(light4);
+	var pointLightHelper = new THREE.PointLightHelper(light4, 1); 
+	scene.add(pointLightHelper);
 	
 	scene.add(new THREE.AmbientLight(0x444444));
 };
