@@ -97,3 +97,18 @@ Entities.createControllableTestEntity = function(world, position, camera) {
     
     return entity;
 };
+
+Entities.createAttackBall = function(world, position) {
+	var geometry = new THREE.SphereGeometry(50, 32, 32);
+	var material = new THREE.MeshPhongMaterial({color: 0xffffff});
+	var entity = new Physijs.SphereMesh(geometry, 
+		Physijs.createMaterial(material, 0.4, 0.6), 0);
+	entity.position.set(position.x, position.y, position.z);
+	entity.__dirtyPosition = true;
+	scene.add(entity);
+	
+	
+	
+	
+	return entity;
+};
