@@ -78,6 +78,7 @@ Entities.createControllableTestEntity = function(world, position, camera) {
         Physijs.createMaterial(
 	        new THREE.MeshBasicMaterial({ 
 	        	color: 0x888888,
+	        	opacity: 0.1,
 	        	map: texture,
 	        	transparent: true }),
     	    0.1, // friction
@@ -94,6 +95,8 @@ Entities.createControllableTestEntity = function(world, position, camera) {
     entity.addController(new CameraController(camera));
     
     world.add(entity);
+    var tween = new createjs.Tween(entity.mesh.material);
+    tween.to({opacity: 1}, 3000);
     
     return entity;
 };

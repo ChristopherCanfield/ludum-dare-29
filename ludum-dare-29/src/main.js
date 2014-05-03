@@ -38,7 +38,6 @@ initialize = function() {
     scene.add(camera);
 
 	world = new World(scene);
-	
 	Levels.createLevelOne(scene, world);
 
 	scene.addEventListener('update', update);
