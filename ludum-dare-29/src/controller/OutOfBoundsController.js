@@ -21,6 +21,12 @@ OutOfBoundsController.prototype.setEntity = function(entity) {
 	this.entity = entity;
 };
 
+OutOfBoundsController.CLASS = "OutOfBoundsController";
+
+OutOfBoundsController.prototype.getClass = function() {
+	return OutOfBoundsController.CLASS;
+};
+
 /**
  * Sets the respawn position. If this is not specified, the entity will be disposed when it goes out
  * of bounds.
@@ -39,6 +45,11 @@ OutOfBoundsController.prototype.update = function() {
 	{
 		if (this.respawnPosition != null)
 		{
+			var c = this.entity.getController(PlayerCharacterController.CLASS);
+			if (c != null) 
+			{
+				c.moveTowardScreen = false;
+			}
 			this.entity.setPosition(this.respawnPosition.x, this.respawnPosition.y, this.respawnPosition.z);
 		}
 		else

@@ -46,7 +46,7 @@ Levels.one.addLights = function(scene) {
 	scene.add(light3);
 	
 	var light4 = new THREE.PointLight(0xFFF67F, 1, 100);
-	light4.position.set(400, 30, 20);
+	light4.position.set(325, 30, 20);
 	scene.add(light4);
 	
 	scene.add(new THREE.AmbientLight(0x444444));

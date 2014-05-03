@@ -15,6 +15,12 @@ CameraController.prototype.setEntity = function(entity) {
 	this.camera.position.set(entity.mesh.position.x, cameraPosition.y, cameraPosition.z);
 };
 
+CameraController.CLASS = "CameraController";
+
+CameraController.prototype.getClass = function() {
+	return CameraController.CLASS;
+};
+
 CameraController.prototype.update = function() {
 	var cameraPosition = this.camera.position;
 	this.camera.position.set(this.entity.mesh.position.x, cameraPosition.y, cameraPosition.z);

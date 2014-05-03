@@ -15,6 +15,12 @@ ProjectileController.prototype.setEntity = function(entity) {
 	this.entity = entity;
 };
 
+ProjectileController.CLASS = "ProjectileController";
+
+ProjectileController.prototype.getClass = function() {
+	return ProjectileController.CLASS;
+};
+
 ProjectileController.prototype.update = function() {
 	if (!this.entity.isDisposed())
 	{

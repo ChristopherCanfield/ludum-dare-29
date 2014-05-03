@@ -23,6 +23,16 @@ Entity.prototype.addController = function(controller) {
 	this.controllers.push(controller);
 };
 
+Entity.prototype.getController = function(controllerClass) {
+	for (var i = 0; i < this.controllers.length; ++i)
+	{
+		if (this.controllers[i].getClass() === controllerClass)
+		{
+			return this.controllers[i];
+		}
+	}
+};
+
 Entity.prototype.addComponent = function(component) {
 	this.components[component.getClass()] = component;
 };

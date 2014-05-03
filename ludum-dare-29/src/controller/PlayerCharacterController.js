@@ -13,6 +13,8 @@ function PlayerCharacterController(world) {
 	this.moveUpZ = false;
 	this.moveDownZ = false;
 	
+	this.moveTowardScreen = false;
+	
 	this.jump = false;
 	
 	this.ACCELERATION = 500;
@@ -28,7 +30,19 @@ PlayerCharacterController.prototype.setEntity = function(entity) {
 	this.entity.mesh.setAngularFactor({x: 0, y: 0, z: 0});
 };
 
+PlayerCharacterController.CLASS = "PlayerCharacterController";
+
+PlayerCharacterController.prototype.getClass = function() {
+	return PlayerCharacterController.CLASS;
+};
+
 PlayerCharacterController.prototype.update = function() {
+	if (this.moveTowardScreen)
+	{
+		this.entity.move(0, 0.85, 3);
+		return;
+	}
+	
 	var velocity = this.entity.mesh.getLinearVelocity();
 	this.processX(velocity);
 	this.processZ(velocity);
@@ -152,12 +166,17 @@ PlayerCharacterController.prototype.keyDown = function(e) {
             // }
         // }
     // }
-     if (keyCode === KeyEvent.DOM_VK_E)
+    if (keyCode === KeyEvent.DOM_VK_E)
     {
     	this.entity.getComponent(BallWeapon.CLASS)
     			.attack(this.world, 
     					this.entity.mesh.position,
     					1, 0, 0);
+    }
+    
+    if (keyCode === KeyEvent.DOM_VK_R)
+    {
+    	this.moveTowardScreen = true;
     }
 };
 
