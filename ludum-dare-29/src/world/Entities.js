@@ -91,8 +91,11 @@ Entities.createControllableTestEntity = function(world, position, camera) {
 	
     entity.setPosition(position.x, position.y, position.z);
     
-    entity.addController(new PlayerCharacterController());
+    entity.addController(new PlayerCharacterController(world));
     entity.addController(new CameraController(camera));
+    
+    entity.addComponent(new BallWeapon());
+    entity.addComponent(new Health(100));
     
     world.add(entity);
     var tween = new createjs.Tween(entity.mesh.material);
@@ -110,7 +113,7 @@ Entities.createAttackBall = function(world, position) {
 	entity.__dirtyPosition = true;
 	scene.add(entity);
 	
-	entity.addComponent(new Health(100));
+	entity.addComponent(new AttackValue(10));
 	
 	return entity;
 };

@@ -3,8 +3,9 @@
  * @author Christopher D. Canfield
  */
 
-function PlayerCharacterController() {
+function PlayerCharacterController(world) {
 	this.entity = null;
+	this.world = world;
 	
 	this.moveRight = false;
 	this.moveLeft = false;
@@ -135,21 +136,26 @@ PlayerCharacterController.prototype.keyDown = function(e) {
     	this.moveDownZ = true;
     	this.moveUpZ = false;		
     }
-    else if (keyCode === KeyEvent.DOM_VK_E)
+    // else if (keyCode === KeyEvent.DOM_VK_E)
+    // {
+        // var box = this.camera.getBoundingBox().clone();
+        // box.xLeft -= 55;
+        // box.width += 110;
+        // box.zBack -= 65;
+        // box.depth += 130;
+//         
+        // for (var i = 0; i < this.doors.length; ++i)
+        // {
+            // if (this.doors[i].intersects(box) && !this.doors[i].isOpen())
+            // {
+                // this.doors[i].open();
+            // }
+        // }
+    // }
+    
+    if (keyCode === KeyEvent.DOM_VK_E)
     {
-        var box = this.camera.getBoundingBox().clone();
-        box.xLeft -= 55;
-        box.width += 110;
-        box.zBack -= 65;
-        box.depth += 130;
-        
-        for (var i = 0; i < this.doors.length; ++i)
-        {
-            if (this.doors[i].intersects(box) && !this.doors[i].isOpen())
-            {
-                this.doors[i].open();
-            }
-        }
+    	this.entity.getComponent(BallWeapon.CLASS).attack(this.world, 1, 0, 0);
     }
 };
 

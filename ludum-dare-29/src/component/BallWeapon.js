@@ -14,7 +14,7 @@ BallWeapon.prototype.getClass = function() {
 	return BallWeapon.CLASS;
 };
 
-BallWeapon.prototype.shoot = function(world, xDir, yDir, zDir) {
+BallWeapon.prototype.attack = function(world, xDir, yDir, zDir) {
 	if (this.timer.getElapsedTime() > this.COOLDOWN_TIME)
 	{
 		world.add(new AttackBall());

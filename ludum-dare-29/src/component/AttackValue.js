@@ -1,15 +1,14 @@
 /**
- * Health.js
+ * AttackValue.js
  * @author Christopher D. Canfield
  */
 
-function Health(maxHealth) {
-	this.MAX_HEALTH = maxHealth;
-	this.health = this.MAX_HEALTH;
+function AttackValue() {
+	this.damage = 10;
 };
 
-Health.CLASS = "Health";
+AttackValue.CLASS = "AttackValue";
 
-Health.prototype.getClass = function() {
-	return Health.CLASS;
+AttackValue.prototype.getClass = function() {
+	return AttackValue.CLASS;
 };

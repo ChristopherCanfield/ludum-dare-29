@@ -7,7 +7,7 @@ function Entity(mesh) {
 	this.mesh = mesh;
 	this.disposed = false;
 	this.controllers = [];
-	this.components = [];
+	this.components = {};
 };
 
 Entity.prototype.update = function() {
@@ -24,7 +24,11 @@ Entity.prototype.addController = function(controller) {
 };
 
 Entity.prototype.addComponent = function(component) {
-	this.components.push(component.getClass(), component);
+	this.components[component.getClass()] = component;
+};
+
+Entity.prototype.getComponent = function(componentClass) {
+	return this.components[componentClass];
 };
 
 Entity.prototype.dispose = function() {
