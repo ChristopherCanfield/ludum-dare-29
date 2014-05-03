@@ -107,8 +107,7 @@ Entities.createAttackBall = function(world, position) {
 	entity.__dirtyPosition = true;
 	scene.add(entity);
 	
-	
-	
+	entity.addComponent(new Health(100));
 	
 	return entity;
 };
