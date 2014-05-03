@@ -3,8 +3,9 @@
  * @author Christopher D. Canfield
  */
 
-function ProjectileController() {
+function ProjectileController(velocityX, velocityY, velocityZ) {
 	this.entity = null;
+	this.velocity = new THREE.Vector3(velocityX, velocityY, velocityZ);
 };
 
 ProjectileController.prototype.setEntity = function(entity) {
@@ -12,5 +13,5 @@ ProjectileController.prototype.setEntity = function(entity) {
 };
 
 ProjectileController.prototype.update = function() {
-	this.entity.move(0.5, 0, 0);
+	this.entity.move(velocity.x, velocity.y, velocity.z);
 };

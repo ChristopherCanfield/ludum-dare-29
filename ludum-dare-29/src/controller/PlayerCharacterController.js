@@ -155,7 +155,10 @@ PlayerCharacterController.prototype.keyDown = function(e) {
     
     if (keyCode === KeyEvent.DOM_VK_E)
     {
-    	this.entity.getComponent(BallWeapon.CLASS).attack(this.world, 1, 0, 0);
+    	this.entity.getComponent(BallWeapon.CLASS)
+    			.attack(this.world, 
+    					this.entity.mesh.position,
+    					1, 0, 0);
     }
 };
 

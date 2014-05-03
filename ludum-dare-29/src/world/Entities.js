@@ -104,16 +104,20 @@ Entities.createControllableTestEntity = function(world, position, camera) {
     return entity;
 };
 
-Entities.createAttackBall = function(world, position) {
+Entities.createAttackBall = function(world, position, velocity, damage) {
 	var geometry = new THREE.SphereGeometry(50, 32, 32);
-	var material = new THREE.MeshPhongMaterial({color: 0xffffff});
+	var material = new THREE.MeshPhongMaterial({color: 0xffffff, opacity: 0.75});
 	var entity = new Physijs.SphereMesh(geometry, 
-		Physijs.createMaterial(material, 0.4, 0.6), 0);
+			Physijs.createMaterial(material, 0.4, 0.6), 0);
+	
+	entity.addComponent(new AttackValue(damage));
+	entity.addControllers(new ProjectileController(velocity.x, velocity.y, velocity.z));
+	
 	entity.position.set(position.x, position.y, position.z);
 	entity.__dirtyPosition = true;
-	scene.add(entity);
 	
-	entity.addComponent(new AttackValue(10));
+	world.add(entity);
+	new createjs.Tween(entity.mesh.material).to({opacity: 1}, 1000);
 	
 	return entity;
 };
