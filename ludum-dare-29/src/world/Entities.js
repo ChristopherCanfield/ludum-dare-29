@@ -93,6 +93,11 @@ Entities.createControllableTestEntity = function(world, position, camera) {
     
     entity.addController(new PlayerCharacterController(world));
     entity.addController(new CameraController(camera));
+    var outOfBoundsController = new OutOfBoundsController(world, -10000, 10000, 
+    		-100, 300, 
+    		-300, 300);
+    outOfBoundsController.setRespawn(position.clone());
+    entity.addController(outOfBoundsController);
     
     entity.addComponent(new BallWeapon());
     entity.addComponent(new Health(100));

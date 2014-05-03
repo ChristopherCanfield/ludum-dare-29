@@ -13,10 +13,21 @@ function OutOfBoundsController(world, minX, maxX, minY, maxY, minZ, maxZ) {
 	this.maxY = maxY;
 	this.minZ = minZ;
 	this.maxZ = maxZ;
+	
+	this.respawnPosition = null;
 };
 
 OutOfBoundsController.prototype.setEntity = function(entity) {
 	this.entity = entity;
+};
+
+/**
+ * Sets the respawn position. If this is not specified, the entity will be disposed when it goes out
+ * of bounds.
+ * @param {THREE.Vector3} respawnPosition
+ */
+OutOfBoundsController.prototype.setRespawn = function(respawnPosition) {
+	this.respawnPosition = respawnPosition;
 };
 
 OutOfBoundsController.prototype.update = function() {
@@ -26,7 +37,14 @@ OutOfBoundsController.prototype.update = function() {
 					this.minY, this.maxY, 
 					this.minZ, this.maxZ))
 	{
-		world.remove(this.entity);
+		if (this.respawnPosition != null)
+		{
+			this.entity.setPosition(this.respawnPosition.x, this.respawnPosition.y, this.respawnPosition.z);
+		}
+		else
+		{
+			world.remove(this.entity);
+		}
 	}
 };
 
