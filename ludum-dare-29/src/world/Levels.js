@@ -53,7 +53,7 @@ Levels.one.addGround = function(scene) {
 		new THREE.BoxGeometry(1000, 100, 50),
 		Physijs.createMaterial(
 			new THREE.MeshPhongMaterial({ 
-				color: 0x877A7A}),
+				color: 0xD67FFF}),
 			0.4, // friction
 			0.2	// restitution
 		),
@@ -135,7 +135,7 @@ Levels.one.addEnemies = function(scene, world) {
 
 Levels.one.addBackground = function(scene) {
 	var geometry = new THREE.SphereGeometry(75, 32, 32);
-	var material = new THREE.MeshPhongMaterial({color: 0xffffff}); 
+	var material = new THREE.MeshPhongMaterial({color: 0xFFE97F}); 
 	var sphere = new Physijs.SphereMesh(geometry, 
 		Physijs.createMaterial(material, 0.4, 0.6), 0);
 	sphere.position.set(0, -10, -120);
@@ -143,7 +143,7 @@ Levels.one.addBackground = function(scene) {
 	scene.add(sphere);
 	
 	var geometry = new THREE.SphereGeometry(50, 32, 32);
-	var material = new THREE.MeshPhongMaterial({color: 0xffffff});
+	var material = new THREE.MeshPhongMaterial({color: 0xC40000});
 	var sphere = new Physijs.SphereMesh(geometry, 
 		Physijs.createMaterial(material, 0.4, 0.6), 0);
 	sphere.position.set(100, -10, -65);
@@ -151,7 +151,7 @@ Levels.one.addBackground = function(scene) {
 	scene.add(sphere);
 	
 	var geometry = new THREE.SphereGeometry(65, 32, 32);
-	var material = new THREE.MeshPhongMaterial({color: 0xffffff}); 
+	var material = new THREE.MeshPhongMaterial({color: 0x7FFF8E}); 
 	var sphere = new THREE.Mesh(geometry, material);
 	sphere.position.set(-75, -20, -75);
 	scene.add(sphere);

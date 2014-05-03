@@ -6,6 +6,7 @@
 function BallWeapon() {
 	this.timer = new THREE.Clock(true);
 	this.COOLDOWN_TIME = 1;
+	this.cooldown = this.COOLDOWN_TIME;
 };
 
 BallWeapon.CLASS = "BallWeapon";
@@ -15,12 +16,13 @@ BallWeapon.prototype.getClass = function() {
 };
 
 BallWeapon.prototype.attack = function(world, position, xDir, yDir, zDir) {
-	if (this.timer.getElapsedTime() > this.COOLDOWN_TIME)
+	this.cooldown += this.timer.getDelta();
+	if (this.cooldown > this.COOLDOWN_TIME)
 	{
 		world.add(Entities.createAttackBall(world, 
 			position,
 			new THREE.Vector3(xDir, yDir, zDir),
 			10));
-		this.timer.start();
+		this.cooldown = 0;
 	}
 };

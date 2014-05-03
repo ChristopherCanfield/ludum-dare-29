@@ -70,7 +70,7 @@ PlayerCharacterController.prototype.processX = function(velocity) {
 	}
 	else
 	{
-		this.entity.mesh.setLinearVelocity({x: 0, y: 0, z: velocity.z});
+		this.entity.mesh.setLinearVelocity({x: 0, y: velocity.y, z: velocity.z});
 		velocity.x = 0;
 	}
 };
@@ -102,7 +102,7 @@ PlayerCharacterController.prototype.processZ = function(velocity) {
 	}
 	else
 	{
-		this.entity.mesh.setLinearVelocity({x: velocity.x, y: 0, z: 0});
+		this.entity.mesh.setLinearVelocity({x: velocity.x, y: velocity.y, z: 0});
 		velocity.z = 0;
 	}
 };
@@ -152,8 +152,7 @@ PlayerCharacterController.prototype.keyDown = function(e) {
             // }
         // }
     // }
-    
-    if (keyCode === KeyEvent.DOM_VK_E)
+     if (keyCode === KeyEvent.DOM_VK_E)
     {
     	this.entity.getComponent(BallWeapon.CLASS)
     			.attack(this.world, 
