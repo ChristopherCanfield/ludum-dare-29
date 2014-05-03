@@ -65,7 +65,7 @@ Entity.prototype.applyImpulse = function(force, offset) {
 };
 
 Entity.prototype.applyCentralImpulse = function(force) {
-	this.mesh.applyCentralImpulse;
+	this.mesh.applyCentralImpulse(force);
 };
 
 Entity.prototype.applyForce = function(force, offset) {

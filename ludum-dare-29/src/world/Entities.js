@@ -50,7 +50,7 @@ Entities.createControllableTestEntity = function(world, position, camera) {
 			// Upper left corner 
 			new THREE.Vector2(0, 1)];
 	
-	var geometry = new THREE.BoxGeometry(7, 10, 0.1);
+	var geometry = new THREE.BoxGeometry(7, 10, 0.001);
     // geometry.faceVertexUvs[0] = [];
     
     // geometry.faceVertexUvs[0][0] = [textureAtlas[0], textureAtlas[1], textureAtlas[3]];
@@ -83,7 +83,7 @@ Entities.createControllableTestEntity = function(world, position, camera) {
     	    0.1, // friction
     	    0.05 // restitution
     	),
-    	10	// weight
+    	5	// weight
     ));
     
     // mesh = new THREE.Mesh(geometry,  material);

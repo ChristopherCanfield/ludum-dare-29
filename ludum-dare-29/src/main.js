@@ -20,7 +20,8 @@ initialize = function() {
     graphics.setClearColor(0x544747, 0.25);
     document.getElementById("viewport").appendChild(graphics.domElement);
 
-    scene = new Physijs.Scene({ fixedTimeStep: 1/120 });
+    scene = new Physijs.Scene();
+    scene.simulate(undefined, 1);
     scene.setGravity(new THREE.Vector3(0, -9.8, 0));
     
     TextureManager.gl = graphics.context;
@@ -31,8 +32,7 @@ initialize = function() {
         1,
         1000
     );
-    // camera = new THREE.OrthographicCamera(window.innerWidth / - 2, window.innerWidth / 2, 
-    		// window.innerHeight / 2, window.innerHeight / - 2, 1, 1000 );
+
     camera.position.set(10, 70, 250);
     camera.lookAt({x: 10, y: 30, z: 0});
     scene.add(camera);
@@ -41,16 +41,20 @@ initialize = function() {
 	
 	Levels.createLevelOne(scene, world);
 
+	scene.addEventListener('update', update);
+
     requestAnimationFrame(render);
 };
 
-render = function() {
+update = function() {
 	// update the controllers.
-    world.update();
+	world.update();
 	
 	// simulate physics.
-    scene.simulate();
-    
+	scene.simulate();
+};
+
+render = function() {
     // render the scene.
     graphics.render(scene, camera);
      

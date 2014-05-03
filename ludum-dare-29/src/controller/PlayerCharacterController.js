@@ -14,7 +14,7 @@ function PlayerCharacterController() {
 	
 	this.jump = false;
 	
-	this.ACCELERATION = 50;
+	this.ACCELERATION = 500;
 	this.MAX_SPEED = 20;
 	this.INITIAL_VELOCITY = 20;
 	
