@@ -1,43 +1,18 @@
 /**
- * Entities.js
+ * PlayerCharacter.js
  * @author Christopher D. Canfield
  */
 
-/**
- * Contains static methods for creating entities.
- */
-function Entities() {}
+
+function PlayerCharacter() {}
 
 /**
- * Simple test entity that is controlled by a movement controller.
- * @param {World} world
- * @param {THREE.Vector3} position the starting position.
- */
-Entities.createTestEnemy = function(world, position) {
-	var entity = new Entity(new Physijs.BoxMesh(
-        new THREE.BoxGeometry(5, 5, 5),
-        Physijs.createMaterial(
-	        new THREE.MeshPhongMaterial({ color: 0x888888 }),
-    	    0.8, // friction
-    	    0.4 // restitution
-    	),
-    	10	// weight
-    ));
-    entity.addController(new TestEnemyController());
-    entity.setPosition(position.x, position.y, position.z);
-    
-    world.add(entity);
-    
-    return entity;
-};
-
-/**
- * Simple controllable test entity.
+ * A player-controlled character.
  * @param {Object} world
  * @param {THREE.Vector3} position the starting position.
  * @param {Camera} camera
  */
-Entities.createControllableTestEntity = function(world, position, camera) {
+PlayerCharacter.create = function(world, position, camera) {
 	var texture = TextureManager.getTexture(TexturePath.Exoskeleton);
 	
 	var textureAtlas = [
@@ -107,21 +82,4 @@ Entities.createControllableTestEntity = function(world, position, camera) {
     tween.to({opacity: 1}, 3000);
     
     return entity;
-};
-
-Entities.createAttackBall = function(world, position, velocity, damage) {
-	var geometry = new THREE.SphereGeometry(2, 32, 32);
-	var material = new THREE.MeshPhongMaterial({color: 0xFF6A00});
-	var entity = new Entity(new Physijs.SphereMesh(geometry, 
-			Physijs.createMaterial(material, 0.4, 0.6), 0));
-	
-	entity.addComponent(new AttackValue(damage));
-	entity.addController(new ProjectileController(world, velocity.x, velocity.y, velocity.z));
-	
-	entity.mesh.position.set(position.x, position.y, position.z);
-	entity.__dirtyPosition = true;
-	
-	world.add(entity);
-	
-	return entity;
 };

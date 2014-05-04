@@ -19,7 +19,7 @@ BallWeapon.prototype.attack = function(world, position, xDir, yDir, zDir) {
 	this.cooldown += this.timer.getDelta();
 	if (this.cooldown > this.COOLDOWN_TIME)
 	{
-		world.add(Entities.createAttackBall(world, 
+		world.add(AttackBall.create(world, 
 			position,
 			new THREE.Vector3(xDir, yDir, zDir),
 			10));

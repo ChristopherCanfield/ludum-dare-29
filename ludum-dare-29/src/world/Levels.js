@@ -26,7 +26,7 @@ Levels.createLevelOne = function(scene, world) {
 	
 	// Add entities.
 	Levels.one.addEnemies(scene, world);
-    Entities.createControllableTestEntity(world, new THREE.Vector3(-20, 5, 0), camera);
+    PlayerCharacter.create(world, new THREE.Vector3(-20, 5, 0), camera);
 };
 
 Levels.one = {};
@@ -146,7 +146,7 @@ Levels.one.addPhysicsObjects = function(scene) {
 };
 	
 Levels.one.addEnemies = function(scene, world) {
-	Entities.createTestEnemy(world, new THREE.Vector3(0, 20, 0));
+	TestEnemey.create(world, new THREE.Vector3(0, 20, 0));
 };
 
 Levels.one.addBackground = function(scene) {
