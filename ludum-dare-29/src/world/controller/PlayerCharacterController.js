@@ -44,8 +44,8 @@ PlayerCharacterController.prototype.update = function() {
 	}
 	
 	var velocity = this.entity.mesh.getLinearVelocity();
-	this.processX(velocity);
-	this.processZ(velocity);
+	var xForce = this.processX(velocity);
+	var zForce = this.processZ(velocity);
 	
 	if (this.jump)
 	{
@@ -55,6 +55,19 @@ PlayerCharacterController.prototype.update = function() {
 	
 	this.entity.mesh.setAngularFactor({x: 0, y: 0, z: 0 });
 	this.entity.rotation = new THREE.Vector3(0, 0, 0);
+	
+	for (var i = 0; i < this.entity.observers.length; ++i)
+	{
+		var follower = this.entity.observers[i].getController(FollowerController.CLASS);
+		if (follower == null)
+		{
+			var followerCommands = followerController.commands;
+			var linearVelocity = this.entity.mesh.getLinearVelocity();
+			followerCommands.push(new MoveCommand(
+				linearVelocity,
+				xForce.add(zForce)));
+		}
+	}
 };
 
 PlayerCharacterController.prototype.processX = function(velocity) {
@@ -68,7 +81,9 @@ PlayerCharacterController.prototype.processX = function(velocity) {
 		{
 			this.entity.mesh.setLinearVelocity({x: this.INITIAL_VELOCITY, y: 0, z: 0});
 		}
-		this.entity.applyCentralForce(new THREE.Vector3(this.ACCELERATION, 0, 0));
+		var force = new THREE.Vector3(this.ACCELERATION, 0, 0);
+		this.entity.applyCentralForce(force);
+		return force;
 	}
 	else if (this.moveLeft)
 	{
@@ -80,12 +95,15 @@ PlayerCharacterController.prototype.processX = function(velocity) {
 		{
 			this.entity.mesh.setLinearVelocity({x: -this.INITIAL_VELOCITY, y: 0, z: 0});
 		}
-		this.entity.applyCentralForce(new THREE.Vector3(-this.ACCELERATION, 0, 0));
+		var force = new THREE.Vector3(-this.ACCELERATION, 0, 0);
+		this.entity.applyCentralForce(force);
+		return force;
 	}
 	else
 	{
 		this.entity.mesh.setLinearVelocity({x: 0, y: velocity.y, z: velocity.z});
 		velocity.x = 0;
+		return new THREE.Vector3();
 	}
 };
 
@@ -100,7 +118,8 @@ PlayerCharacterController.prototype.processZ = function(velocity) {
 		{
 			this.entity.mesh.setLinearVelocity({x: 0, y: 0, z: -this.INITIAL_VELOCITY});
 		}
-		this.entity.applyCentralForce(new THREE.Vector3(0, 0, -this.ACCELERATION));
+		var force = new THREE.Vector3(0, 0, -this.ACCELERATION);
+		this.entity.applyCentralForce(force);
 	}
 	else if (this.moveDownZ)
 	{
@@ -112,12 +131,15 @@ PlayerCharacterController.prototype.processZ = function(velocity) {
 		{
 			this.entity.mesh.setLinearVelocity({x: 0, y: 0, z: this.INITIAL_VELOCITY});
 		}
-		this.entity.applyCentralForce(new THREE.Vector3(0, 0, this.ACCELERATION));
+		var force = new THREE.Vector3(0, 0, this.ACCELERATION);
+		this.entity.applyCentralForce(force);
+		return force;
 	}
 	else
 	{
 		this.entity.mesh.setLinearVelocity({x: velocity.x, y: velocity.y, z: 0});
 		velocity.z = 0;
+		return new THREE.Vector3();
 	}
 };
 

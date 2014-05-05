@@ -12,11 +12,12 @@ function FollowerController(followedEntity) {
 	// + Command(followedEntity)
 	// + execute(entity)
 	// + ticksUntilExecution
-	this.commands = null;
+	this.commands = [];
 };
 
 FollowerController.prototype.setEntity = function(entity) {
 	this.entity = entity;
+	this.followedEntity.observers.push(entity);
 };
 
 FollowerController.CLASS = "FollowerController";

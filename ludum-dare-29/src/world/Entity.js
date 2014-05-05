@@ -6,8 +6,15 @@
 function Entity(mesh) {
 	this.mesh = mesh;
 	this.disposed = false;
+	
+	// Type: Controller.
 	this.controllers = [];
+	
+	// Key: Component class string; Value: Component.
 	this.components = {};
+	
+	// Type: Entity.
+	this.observers = [];
 };
 
 Entity.prototype.update = function() {
