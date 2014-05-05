@@ -4,13 +4,16 @@
  */
 
 
+/**
+ * A player-controlled character. 
+ */
 function PlayerCharacter() {}
 
 /**
- * A player-controlled character.
- * @param {Object} world
+ * Creates a player-controlled character.
+ * @param {World} world reference to the game world.
  * @param {THREE.Vector3} position the starting position.
- * @param {Camera} camera
+ * @param {Camera} camera the game camera.
  */
 PlayerCharacter.create = function(world, position, camera) {
 	var texture = TextureManager.getTexture(TexturePath.Exoskeleton);
@@ -66,7 +69,6 @@ PlayerCharacter.create = function(world, position, camera) {
 	
     entity.setPosition(position.x, position.y, position.z);
  	
-    
     entity.addController(new PlayerCharacterController(world));
     entity.addController(new CameraController(camera));
     var outOfBoundsController = new OutOfBoundsController(world, -10000, 10000, 

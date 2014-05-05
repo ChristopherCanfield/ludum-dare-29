@@ -11,6 +11,10 @@ function ProjectileController(world, velocityX, velocityY, velocityZ) {
 	this.MAX_DISTANCE = 100;
 };
 
+/**
+ * Sets the Controller's entity. This is automatically called when the controller
+ * is added to an entity. 
+ */
 ProjectileController.prototype.setEntity = function(entity) {
 	this.entity = entity;
 };

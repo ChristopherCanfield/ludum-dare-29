@@ -3,11 +3,18 @@
  * @author Christopher D. Canfield
  */
 
+/**
+ * The game world.
+ * {Physijs.Scene} scene the physijs scene object. 
+ */
 function World(scene) {
 	this.scene = scene;
 	this.entities = [];
 };
 
+/**
+ * Calls updated on all entities. Removes any disposed entities from the scene.
+ */
 World.prototype.update = function() {
 	for (var i = 0; i < this.entities.length; ++i)
 	{
@@ -23,6 +30,10 @@ World.prototype.update = function() {
 	}
 };
 
+/**
+ * Adds an entity to the scene. 
+ * @param {Entity} entity the entity to add.
+ */
 World.prototype.add = function(entity) {
 	if (!(entity instanceof Entity))
 	{
@@ -33,6 +44,10 @@ World.prototype.add = function(entity) {
 	this.scene.add(entity.mesh);
 };
 
+/**
+ * Removes an entity from the scene. 
+ * @param {Entity} entity the entity to remove.
+ */
 World.prototype.remove = function(entity) {
 	if (!(entity instanceof Entity))
 	{

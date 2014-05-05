@@ -5,7 +5,7 @@
 
 /**
  * The base game simulation type. 
- * @param {Object} mesh
+ * @param {Physijs.Mesh} mesh the physics mesh.
  */
 function Entity(mesh) {
 	this.mesh = mesh;
@@ -70,6 +70,9 @@ Entity.prototype.getComponent = function(componentClass) {
 	return this.components[componentClass];
 };
 
+/**
+ * Moves the entity, and sets its __dirtyPosition flag to true.
+ */
 Entity.prototype.move = function(x, y, z) {
 	this.mesh.position.x += x;
 	this.mesh.position.y += y;
@@ -78,6 +81,9 @@ Entity.prototype.move = function(x, y, z) {
 	this.mesh.__dirtyPosition = true;
 };
 
+/**
+ * Rotates the entity, and sets its __dirtyRotation flag to true. 
+ */
 Entity.prototype.rotate = function(x, y, z) {
 	this.mesh.rotation.x += x;
 	this.mesh.rotation.y += y;
@@ -86,6 +92,9 @@ Entity.prototype.rotate = function(x, y, z) {
 	this.mesh.__dirtyRotation = true;
 };
 
+/**
+ * Sets the entity's position, and sets its __dirtyPosition flag to true. 
+ */
 Entity.prototype.setPosition = function(x, y, z) {
 	this.mesh.position.x = x;
 	this.mesh.position.y = y;
@@ -94,24 +103,41 @@ Entity.prototype.setPosition = function(x, y, z) {
 	this.mesh.__dirtyPosition = true;
 };
 
+/**
+ * Sets the entity's rotation, and sets its __dirtyRotation flag to true. 
+ */
 Entity.prototype.setRotation = function(x, y, z) {
 	this.mesh.rotation.x = x;
 	this.mesh.rotation.y = y;
 	this.mesh.rotation.z = z;
+	
+	this.mesh.__dirtyRotation = true;
 };
 
+/**
+ * Applies an impulse to the entity. 
+ */
 Entity.prototype.applyImpulse = function(force, offset) {
 	this.mesh.applyImpulse(force, offset);
 };
 
+/**
+ * Applies a central impulse to the entity. 
+ */
 Entity.prototype.applyCentralImpulse = function(force) {
 	this.mesh.applyCentralImpulse(force);
 };
 
+/**
+ * Applies a force to the entity. 
+ */
 Entity.prototype.applyForce = function(force, offset) {
 	this.mesh.applyForce(force, offset);
 };
 
+/**
+ * Applies a central force to the entity. 
+ */
 Entity.prototype.applyCentralForce = function(force) {
 	this.mesh.applyCentralForce(force);
 };

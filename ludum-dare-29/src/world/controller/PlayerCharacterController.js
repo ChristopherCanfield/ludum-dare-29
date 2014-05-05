@@ -3,6 +3,9 @@
  * @author Christopher D. Canfield
  */
 
+/**
+ * Allows a player to control a game entity using the keyboard. 
+ */
 function PlayerCharacterController(world) {
 	this.entity = null;
 	this.world = world;
@@ -25,6 +28,10 @@ function PlayerCharacterController(world) {
 	$(window).keyup(this.keyUp.bind(this));
 };
 
+/**
+ * Sets the Controller's entity. This is automatically called when the controller
+ * is added to an entity. 
+ */
 PlayerCharacterController.prototype.setEntity = function(entity) {
 	this.entity = entity;
 	this.entity.mesh.setAngularFactor({x: 0, y: 0, z: 0});
@@ -44,8 +51,8 @@ PlayerCharacterController.prototype.update = function() {
 	}
 	
 	var velocity = this.entity.mesh.getLinearVelocity();
-	this.processX(velocity);
-	this.processZ(velocity);
+	this.__processX(velocity);
+	this.__processZ(velocity);
 	
 	if (this.jump)
 	{
@@ -57,7 +64,7 @@ PlayerCharacterController.prototype.update = function() {
 	this.entity.rotation = new THREE.Vector3(0, 0, 0);
 };
 
-PlayerCharacterController.prototype.processX = function(velocity) {
+PlayerCharacterController.prototype.__processX = function(velocity) {
 	if (this.moveRight)
 	{
 		if (velocity.x >= this.MAX_SPEED)
@@ -91,7 +98,7 @@ PlayerCharacterController.prototype.processX = function(velocity) {
 	}
 };
 
-PlayerCharacterController.prototype.processZ = function(velocity) {
+PlayerCharacterController.prototype.__processZ = function(velocity) {
 	if (this.moveUpZ)
 	{
 		if (velocity.z <= -this.MAX_SPEED)

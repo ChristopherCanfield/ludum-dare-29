@@ -3,11 +3,15 @@
  * @author Christopher D. Canfield
  */
 
+
+/**
+ * A simple test enemy, used for testing. 
+ */
 function TestEnemy() {}
 
 /**
  * Simple test entity that is controlled by a movement controller.
- * @param {World} world
+ * @param {World} world reference to the game world.
  * @param {THREE.Vector3} position the starting position.
  */
 TestEnemy.create = function(world, position) {

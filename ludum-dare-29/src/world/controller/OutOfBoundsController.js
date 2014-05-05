@@ -3,6 +3,14 @@
  * @author Christopher D. Canfield
  */
 
+/**
+ * Controls the behavior of an entity when it goes out of the specified bounds. There
+ * are two possible behaviors in this situation:
+ * 1. The entity is removed from the game. This occurs if the respawnPosition is not
+ * set (call setRespawn on this controller to set it).
+ * 2. The entity is moved back to a respawn location. Call <code>setRespawn</code> to
+ * set the respawn position.
+ */
 function OutOfBoundsController(world, minX, maxX, minY, maxY, minZ, maxZ) {
 	this.world = world;
 	this.entity = null;
@@ -17,6 +25,10 @@ function OutOfBoundsController(world, minX, maxX, minY, maxY, minZ, maxZ) {
 	this.respawnPosition = null;
 };
 
+/**
+ * Sets the Controller's entity. This is automatically called when the controller
+ * is added to an entity. 
+ */
 OutOfBoundsController.prototype.setEntity = function(entity) {
 	this.entity = entity;
 };
@@ -50,7 +62,9 @@ OutOfBoundsController.prototype.update = function() {
 			{
 				c.moveTowardScreen = false;
 			}
-			this.entity.setPosition(this.respawnPosition.x, this.respawnPosition.y, this.respawnPosition.z);
+			this.entity.setPosition(this.respawnPosition.x, 
+					this.respawnPosition.y, 
+					this.respawnPosition.z);
 		}
 		else
 		{
