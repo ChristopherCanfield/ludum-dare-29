@@ -146,7 +146,7 @@ Levels.one.addPhysicsObjects = function(scene) {
 };
 	
 Levels.one.addEnemies = function(scene, world) {
-	TestEnemey.create(world, new THREE.Vector3(0, 20, 0));
+	TestEnemy.create(world, new THREE.Vector3(0, 20, 0));
 };
 
 Levels.one.addBackground = function(scene) {
