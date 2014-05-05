@@ -27,23 +27,26 @@ FollowerController.prototype.getClass = function() {
 };
 
 FollowerController.prototype.update = function() {
-	for (var i = 0; i < this.commands.length; ++i)
+	if (this.commands.length > 0)
 	{
-		if (this.commands[i].ticksUntilExecution === 0)
+		for (var i = 0; i < this.commands.length; ++i)
 		{
-			this.commands[i].execute(this.entity);
+			if (this.commands[i].ticksUntilExecution === 0)
+			{
+				this.commands[i].execute(this.entity);
+			}
+			else
+			{
+				this.commands[i].ticksUntilExecution--;
+			}
 		}
-		else
+		
+		for (i = this.commands.length - 1; i > 0; --i)
 		{
-			this.commands[i].ticksUntilExecution--;
-		}
-	}
-	
-	for (var i = this.commands.length; i > 0; --i)
-	{
-		if (this.commands[i].ticksUntilExecution <= 0)
-		{
-			this.commands.splice(i, 1);
+			if (this.commands[i].ticksUntilExecution === 0)
+			{
+				this.commands.splice(i, 1);
+			}
 		}
 	}
 };

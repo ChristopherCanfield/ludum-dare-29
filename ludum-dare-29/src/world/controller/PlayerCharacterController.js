@@ -56,18 +56,7 @@ PlayerCharacterController.prototype.update = function() {
 	this.entity.mesh.setAngularFactor({x: 0, y: 0, z: 0 });
 	this.entity.rotation = new THREE.Vector3(0, 0, 0);
 	
-	for (var i = 0; i < this.entity.observers.length; ++i)
-	{
-		var follower = this.entity.observers[i].getController(FollowerController.CLASS);
-		if (follower == null)
-		{
-			var followerCommands = followerController.commands;
-			var linearVelocity = this.entity.mesh.getLinearVelocity();
-			followerCommands.push(new MoveCommand(
-				linearVelocity,
-				xForce.add(zForce)));
-		}
-	}
+	this.notifyObservers(xForce, zForce);
 };
 
 PlayerCharacterController.prototype.processX = function(velocity) {
@@ -120,6 +109,7 @@ PlayerCharacterController.prototype.processZ = function(velocity) {
 		}
 		var force = new THREE.Vector3(0, 0, -this.ACCELERATION);
 		this.entity.applyCentralForce(force);
+		return force;
 	}
 	else if (this.moveDownZ)
 	{
@@ -143,6 +133,27 @@ PlayerCharacterController.prototype.processZ = function(velocity) {
 	}
 };
 
+PlayerCharacterController.prototype.notifyObservers = function(xForce, zForce) {
+	if (MoveCommand.nextCommandTime < 0)
+	{
+		for (var i = 0; i < this.entity.observers.length; ++i)
+		{
+			var follower = this.entity.observers[i].getController(FollowerController.CLASS);
+			if (follower != null)
+			{
+				var linearVelocity = this.entity.mesh.getLinearVelocity();
+				follower.commands.push(new MoveCommand(
+					linearVelocity,
+					xForce.add(zForce)));
+			}
+		}
+		MoveCommand.nextCommandTime = MoveCommand.TIME_BETWEEN_COMMANDS;
+	}
+	else
+	{
+		MoveCommand.nextCommandTime--;
+	}
+};
 
 
 PlayerCharacterController.prototype.keyDown = function(e) {
