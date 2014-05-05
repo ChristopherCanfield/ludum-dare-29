@@ -26,7 +26,8 @@ Levels.createLevelOne = function(scene, world) {
 	
 	// Add entities.
 	Levels.one.addEnemies(scene, world);
-    PlayerCharacter.create(world, new THREE.Vector3(-20, 5, 0), camera);
+    var player = PlayerCharacter.create(world, new THREE.Vector3(-20, 5, 0), camera);
+    Follower.create(world, new THREE.Vector3(-40, 3, 0), player);
 };
 
 Levels.one = {};

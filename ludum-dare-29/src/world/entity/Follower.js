@@ -39,6 +39,8 @@ Follower.create = function(world, position, followedEntity) {
 	entity.__dirtyPosition = true;
 	
 	world.add(entity);
+	var tween = new createjs.Tween(entity.mesh.material);
+    tween.to({opacity: 1}, 2500);
 	
 	return entity;
 };

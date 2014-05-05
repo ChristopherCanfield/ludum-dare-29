@@ -6,6 +6,13 @@
 function FollowerController(followedEntity) {
 	this.entity = null;
 	this.followedEntity = followedEntity;
+	
+	// Commands implement the following interface:
+	// Command
+	// + Command(followedEntity)
+	// + execute(entity)
+	// + ticksUntilExecution
+	this.commands = null;
 };
 
 FollowerController.prototype.setEntity = function(entity) {
@@ -19,8 +26,23 @@ FollowerController.prototype.getClass = function() {
 };
 
 FollowerController.prototype.update = function() {
-	var followedEntSpeed = this.followedEntity.mesh.getLinearVelocity();
+	for (var i = 0; i < this.commands.length; ++i)
+	{
+		if (this.commands[i].ticksUntilExecution === 0)
+		{
+			this.commands[i].execute(this.entity);
+		}
+		else
+		{
+			this.commands[i].ticksUntilExecution--;
+		}
+	}
 	
-	this.entity.setLinearVelocity = followedEntSpeed;
-	// this.entity.position.set(this.entity.mesh.position.x, cameraPosition.y, cameraPosition.z);
+	for (var i = this.commands.length; i > 0; --i)
+	{
+		if (this.commands[i].ticksUntilExecution <= 0)
+		{
+			this.commands.splice(i, 1);
+		}
+	}
 };

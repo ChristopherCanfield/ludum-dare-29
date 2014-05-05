@@ -80,7 +80,7 @@ PlayerCharacter.create = function(world, position, camera) {
     
     world.add(entity);
     var tween = new createjs.Tween(entity.mesh.material);
-    tween.to({opacity: 1}, 3000);
+    tween.to({opacity: 1}, 2500);
     
     return entity;
 };
