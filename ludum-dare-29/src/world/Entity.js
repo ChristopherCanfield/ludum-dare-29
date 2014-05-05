@@ -16,9 +16,6 @@ function Entity(mesh) {
 	
 	// Key: Component class string; Value: Component.
 	this.components = {};
-	
-	// Type: Entity.
-	this.observers = [];
 };
 
 /**

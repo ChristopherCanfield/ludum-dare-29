@@ -55,8 +55,6 @@ PlayerCharacterController.prototype.update = function() {
 	
 	this.entity.mesh.setAngularFactor({x: 0, y: 0, z: 0 });
 	this.entity.rotation = new THREE.Vector3(0, 0, 0);
-	
-	this.notifyObservers(this.entity.mesh.getLinearVelocity());
 };
 
 PlayerCharacterController.prototype.processX = function(velocity) {
@@ -124,25 +122,6 @@ PlayerCharacterController.prototype.processZ = function(velocity) {
 	{
 		this.entity.mesh.setLinearVelocity({x: velocity.x, y: velocity.y, z: 0});
 		velocity.z = 0;
-	}
-};
-
-PlayerCharacterController.prototype.notifyObservers = function(velocity) {
-	if (MoveCommand.nextCommandTime < 0)
-	{
-		for (var i = 0; i < this.entity.observers.length; ++i)
-		{
-			var follower = this.entity.observers[i].getController(FollowerController.CLASS);
-			if (follower != null)
-			{
-				follower.commands.push(new MoveCommand(velocity.clone()));
-			}
-		}
-		MoveCommand.nextCommandTime = MoveCommand.TIME_BETWEEN_COMMANDS;
-	}
-	else
-	{
-		MoveCommand.nextCommandTime--;
 	}
 };
 
