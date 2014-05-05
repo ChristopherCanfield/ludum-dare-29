@@ -22,7 +22,7 @@ initialize = function() {
 
     scene = new Physijs.Scene();
     scene.simulate(undefined, 1);
-    scene.setGravity(new THREE.Vector3(0, -9.8, 0));
+    scene.setGravity(new THREE.Vector3(0, -12, 0));
     
     TextureManager.gl = graphics.context;
 
@@ -38,7 +38,7 @@ initialize = function() {
     scene.add(camera);
 
 	world = new World(scene);
-	Levels.createLevelOne(scene, world);
+	Levels.createLevelOne(scene, world, camera);
 
 	scene.addEventListener('update', update);
 

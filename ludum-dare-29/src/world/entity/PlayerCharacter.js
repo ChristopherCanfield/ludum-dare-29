@@ -72,7 +72,7 @@ PlayerCharacter.create = function(world, position, camera) {
     entity.addController(new PlayerCharacterController(world));
     entity.addController(new CameraController(camera));
     var outOfBoundsController = new OutOfBoundsController(world, -10000, 10000, 
-    		-100, 300, 
+    		-50, 300, 
     		-300, 300);
     outOfBoundsController.setRespawn(position.clone());
     entity.addController(outOfBoundsController);

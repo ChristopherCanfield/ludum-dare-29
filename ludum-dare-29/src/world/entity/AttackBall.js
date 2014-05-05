@@ -19,7 +19,9 @@ AttackBall.create = function(world, position, velocity, damage) {
 	var geometry = new THREE.SphereGeometry(2, 32, 32);
 	var material = new THREE.MeshPhongMaterial({color: 0xFF6A00});
 	var entity = new Entity(new Physijs.SphereMesh(geometry, 
-			Physijs.createMaterial(material, 0.4, 0.6), 0));
+			Physijs.createMaterial(material, 0.4, 0.6), 
+			200) // weight
+			);
 	
 	entity.addComponent(new AttackValue(damage));
 	entity.addController(new ProjectileController(world, velocity.x, velocity.y, velocity.z));
