@@ -65,6 +65,7 @@ PlayerCharacter.create = function(world, position, camera) {
     // mesh = new THREE.Mesh(geometry,  material);
 	
     entity.setPosition(position.x, position.y, position.z);
+ 	
     
     entity.addController(new PlayerCharacterController(world));
     entity.addController(new CameraController(camera));

@@ -41,14 +41,6 @@ Entity.prototype.getComponent = function(componentClass) {
 	return this.components[componentClass];
 };
 
-Entity.prototype.dispose = function() {
-	this.disposed = true;
-};
-
-Entity.prototype.isDisposed = function() {
-	return this.disposed;
-};
-
 Entity.prototype.move = function(x, y, z) {
 	this.mesh.position.x += x;
 	this.mesh.position.y += y;
@@ -100,4 +92,12 @@ Entity.prototype.accelerate = function(force) {
 	mesh.setLinearVelocity(new THREE.Vector3(velocity.x + force.x, 
 		velocity.y + force.y,
 		velocity.z + force.z));
+};
+
+Entity.prototype.dispose = function() {
+	this.disposed = true;
+};
+
+Entity.prototype.isDisposed = function() {
+	return this.disposed;
 };
