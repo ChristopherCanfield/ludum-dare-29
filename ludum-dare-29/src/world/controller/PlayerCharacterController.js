@@ -44,8 +44,8 @@ PlayerCharacterController.prototype.update = function() {
 	}
 	
 	var velocity = this.entity.mesh.getLinearVelocity();
-	var xForce = this.processX(velocity);
-	var zForce = this.processZ(velocity);
+	this.processX(velocity);
+	this.processZ(velocity);
 	
 	if (this.jump)
 	{
@@ -56,7 +56,7 @@ PlayerCharacterController.prototype.update = function() {
 	this.entity.mesh.setAngularFactor({x: 0, y: 0, z: 0 });
 	this.entity.rotation = new THREE.Vector3(0, 0, 0);
 	
-	this.notifyObservers(xForce, zForce);
+	this.notifyObservers(this.entity.mesh.getLinearVelocity());
 };
 
 PlayerCharacterController.prototype.processX = function(velocity) {
@@ -72,7 +72,6 @@ PlayerCharacterController.prototype.processX = function(velocity) {
 		}
 		var force = new THREE.Vector3(this.ACCELERATION, 0, 0);
 		this.entity.applyCentralForce(force);
-		return force;
 	}
 	else if (this.moveLeft)
 	{
@@ -86,13 +85,11 @@ PlayerCharacterController.prototype.processX = function(velocity) {
 		}
 		var force = new THREE.Vector3(-this.ACCELERATION, 0, 0);
 		this.entity.applyCentralForce(force);
-		return force;
 	}
 	else
 	{
 		this.entity.mesh.setLinearVelocity({x: 0, y: velocity.y, z: velocity.z});
 		velocity.x = 0;
-		return this.entity.mesh.getLinearVelocity().clone();
 	}
 };
 
@@ -109,7 +106,6 @@ PlayerCharacterController.prototype.processZ = function(velocity) {
 		}
 		var force = new THREE.Vector3(0, 0, -this.ACCELERATION);
 		this.entity.applyCentralForce(force);
-		return force;
 	}
 	else if (this.moveDownZ)
 	{
@@ -123,17 +119,15 @@ PlayerCharacterController.prototype.processZ = function(velocity) {
 		}
 		var force = new THREE.Vector3(0, 0, this.ACCELERATION);
 		this.entity.applyCentralForce(force);
-		return force;
 	}
 	else
 	{
 		this.entity.mesh.setLinearVelocity({x: velocity.x, y: velocity.y, z: 0});
 		velocity.z = 0;
-		return this.entity.mesh.getLinearVelocity().clone();
 	}
 };
 
-PlayerCharacterController.prototype.notifyObservers = function(xForce, zForce) {
+PlayerCharacterController.prototype.notifyObservers = function(velocity) {
 	if (MoveCommand.nextCommandTime < 0)
 	{
 		for (var i = 0; i < this.entity.observers.length; ++i)
@@ -141,8 +135,7 @@ PlayerCharacterController.prototype.notifyObservers = function(xForce, zForce) {
 			var follower = this.entity.observers[i].getController(FollowerController.CLASS);
 			if (follower != null)
 			{
-				follower.commands.push(new MoveCommand(
-					xForce.setZ(zForce.z)));
+				follower.commands.push(new MoveCommand(velocity.clone()));
 			}
 		}
 		MoveCommand.nextCommandTime = MoveCommand.TIME_BETWEEN_COMMANDS;
