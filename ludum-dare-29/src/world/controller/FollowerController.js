@@ -41,7 +41,8 @@ FollowerController.prototype.update = function() {
 			}
 		}
 		
-		for (i = this.commands.length - 1; i > 0; --i)
+		var commandCount = this.commands.length;
+		for (i = commandCount - 1; i > 0; --i)
 		{
 			if (this.commands[i].ticksUntilExecution === 0)
 			{

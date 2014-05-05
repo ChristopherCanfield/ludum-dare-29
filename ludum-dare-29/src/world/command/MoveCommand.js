@@ -7,6 +7,8 @@
 function MoveCommand(linearVelocity) {
 	this.linearVelocity = linearVelocity;
 	this.ticksUntilExecution = MoveCommand.TICKS_UNTIL_EXECUTION;
+	
+	this.ticksUntilExecution = 10;
 };
 
 MoveCommand.TICKS_UNTIL_EXECUTION = 10;
@@ -21,5 +23,3 @@ MoveCommand.prototype.execute = function(entity) {
 	entity.mesh.setAngularFactor({x: 0, y: 0, z: 0});
 	entity.rotate(0, 0, 0);
 };
-
-MoveCommand.prototype.ticksUntilExecution = 10;

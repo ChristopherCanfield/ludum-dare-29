@@ -92,7 +92,7 @@ PlayerCharacterController.prototype.processX = function(velocity) {
 	{
 		this.entity.mesh.setLinearVelocity({x: 0, y: velocity.y, z: velocity.z});
 		velocity.x = 0;
-		return new THREE.Vector3();
+		return this.entity.mesh.getLinearVelocity().clone();
 	}
 };
 
@@ -129,7 +129,7 @@ PlayerCharacterController.prototype.processZ = function(velocity) {
 	{
 		this.entity.mesh.setLinearVelocity({x: velocity.x, y: velocity.y, z: 0});
 		velocity.z = 0;
-		return new THREE.Vector3();
+		return this.entity.mesh.getLinearVelocity().clone();
 	}
 };
 
@@ -141,10 +141,8 @@ PlayerCharacterController.prototype.notifyObservers = function(xForce, zForce) {
 			var follower = this.entity.observers[i].getController(FollowerController.CLASS);
 			if (follower != null)
 			{
-				var linearVelocity = this.entity.mesh.getLinearVelocity();
 				follower.commands.push(new MoveCommand(
-					linearVelocity,
-					xForce.add(zForce)));
+					xForce.setZ(zForce.z)));
 			}
 		}
 		MoveCommand.nextCommandTime = MoveCommand.TIME_BETWEEN_COMMANDS;
